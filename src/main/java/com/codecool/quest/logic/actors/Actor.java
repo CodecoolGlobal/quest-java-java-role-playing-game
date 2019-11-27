@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.environment.Environment;
 import com.codecool.quest.logic.environment.OpenDoor;
 import com.codecool.quest.logic.items.Item;
@@ -41,12 +42,22 @@ public abstract class Actor implements Drawable {
         }
     }
 
+    public void monsterMove(int dx, int dy) {
+        Cell nextCell = cell.getNeighbor(dx, dy);
+        if (Objects.isNull(nextCell.getActor()) && !nextCell.getTileName().equals("wall")) {
+            cell.setActor(null);
+            nextCell.setActor(this);
+            cell = nextCell;
+        }
+    }
+
     public void battle(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
         if (enemy.health > 0) {
             this.health -= enemy.attack - this.defense;
         } else {
             enemy.getCell().setActor(null);
+            MapLoader.skeletons.remove(enemy);
         }
         if (this.health <= 0){
             System.out.println("GAME OVER");
@@ -65,8 +76,10 @@ public abstract class Actor implements Drawable {
     }
 
     public void pickUp() {
-        inventory.add(cell.getItem());
-        cell.setItem(null);
+        if(cell.getItem() != null) {
+            inventory.add(cell.getItem());
+            cell.setItem(null);
+        }
     }
 
     public int getHealth() {

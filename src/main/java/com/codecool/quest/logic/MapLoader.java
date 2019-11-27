@@ -6,15 +6,20 @@ import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Shield;
 
+
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MapLoader {
+    public static ArrayList<Skeleton> skeletons = new ArrayList<>();
+
     public static GameMap loadMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
+
 
         scanner.nextLine(); // empty line
 
@@ -36,7 +41,9 @@ public class MapLoader {
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
-                            new Skeleton(cell);
+                            Skeleton skeleton = new Skeleton(cell);
+                            map.setSkeleton(skeleton);
+                            skeletons.add(skeleton);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);

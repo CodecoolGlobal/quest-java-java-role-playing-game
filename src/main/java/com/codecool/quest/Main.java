@@ -4,6 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
+import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -18,6 +19,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+import java.util.Random;
+import java.util.concurrent.CompletableFuture;
+
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
@@ -27,6 +32,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     ListView inventory = new ListView();
+
 
     public static void main(String[] args) {
         launch(args);
@@ -40,7 +46,7 @@ public class Main extends Application {
 
         ui.add(healthLabel, 0, 0);
         ui.add(new Label("Inventory"), 0, 1);
-        ui.add(inventory,0, 2);
+        ui.add(inventory, 0, 2);
 
         BorderPane borderPane = new BorderPane();
 
@@ -51,6 +57,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
+
+        CompletableFuture.runAsync(this::aiMovement);
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
@@ -71,7 +79,7 @@ public class Main extends Application {
                 refresh();
                 break;
             case D:
-                map.getPlayer().move(1,0);
+                map.getPlayer().move(1, 0);
                 refresh();
                 break;
             case F:
@@ -100,10 +108,31 @@ public class Main extends Application {
         }
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         inventory.getItems().clear();
-        for (Item item: map.getPlayer().getInventory()) {
+        for (Item item : map.getPlayer().getInventory()) {
             if (!inventory.getItems().contains(item.getTileName())) {
                 inventory.getItems().add(item.getTileName());
             }
         }
+    }
+
+    private void aiMovement(){
+        while("fasz" == "fasz") {
+            for (Skeleton skeleton : MapLoader.skeletons) {
+                skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+                refresh();
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    private int getRandomNumber(){
+        Random r = new Random();
+        int random = r.nextInt(3)-1;
+        System.out.println(random);
+        return random;
+
     }
 }
