@@ -9,10 +9,11 @@ import com.codecool.quest.logic.items.Shield;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class MapLoader {
-    public static ArrayList<Skeleton> skeletons = new ArrayList<>();
+    public static LinkedList<Skeleton> skeletons = new LinkedList<>();
 
     public static GameMap loadMap() {
         InputStream is = MapLoader.class.getResourceAsStream("/map.txt");

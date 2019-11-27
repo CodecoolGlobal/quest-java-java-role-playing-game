@@ -20,6 +20,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -69,22 +70,27 @@ public class Main extends Application {
             case W:
                 map.getPlayer().move(0, -1);
                 refresh();
+                labelRefresh();
                 break;
             case S:
                 map.getPlayer().move(0, 1);
                 refresh();
+                labelRefresh();
                 break;
             case A:
                 map.getPlayer().move(-1, 0);
                 refresh();
+                labelRefresh();
                 break;
             case D:
                 map.getPlayer().move(1, 0);
                 refresh();
+                labelRefresh();
                 break;
             case F:
                 map.getPlayer().pickUp();
                 refresh();
+                labelRefresh();
                 break;
         }
     }
@@ -106,6 +112,10 @@ public class Main extends Application {
                 }
             }
         }
+
+    }
+
+    private void labelRefresh(){
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         inventory.getItems().clear();
         for (Item item : map.getPlayer().getInventory()) {
@@ -116,9 +126,10 @@ public class Main extends Application {
     }
 
     private void aiMovement(){
-        while("fasz" == "fasz") {
-            for (Skeleton skeleton : MapLoader.skeletons) {
-                skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+        while(true) {
+            ListIterator<Skeleton> list_Iter = MapLoader.skeletons.listIterator(0);
+            while (list_Iter.hasNext()){
+                list_Iter.next().monsterMove(getRandomNumber(), getRandomNumber());
                 refresh();
                 try {
                     Thread.sleep(200);
