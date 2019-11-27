@@ -89,16 +89,17 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null) {
                     Tiles.drawTile(context, cell.getActor(), x, y);
-                }
-                else if (cell.getItem() != null) {
+                } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                }else {
+                } else if (cell.getEnvironment() != null) {
+                    Tiles.drawTile(context, cell.getEnvironment(), x, y);
+                } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
             }
         }
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
-
+        inventory.getItems().clear();
         for (Item item: map.getPlayer().getInventory()) {
             if (!inventory.getItems().contains(item.getTileName())) {
                 inventory.getItems().add(item.getTileName());

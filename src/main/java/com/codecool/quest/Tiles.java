@@ -24,12 +24,19 @@ public class Tiles {
     }
 
     static {
+        //Environment
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
+        tileMap.put("closedDoor", new Tile(3,9));
+        tileMap.put("openDoor", new Tile(6,9));
+        //Actors
         tileMap.put("player", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
+        //Items
         tileMap.put("shield", new Tile(5, 26));
+        tileMap.put("key", new Tile(16,23));
+
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

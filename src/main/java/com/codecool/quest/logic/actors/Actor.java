@@ -2,7 +2,10 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.environment.Environment;
+import com.codecool.quest.logic.environment.OpenDoor;
 import com.codecool.quest.logic.items.Item;
+import com.codecool.quest.logic.items.Key;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +32,12 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        } else if (!Objects.isNull(nextCell.getActor())) {
-            battle(nextCell.getActor());
+        }else if (!Objects.isNull(nextCell.getActor())) {
+            if(nextCell.getActor().getTileName().equals("closedDoor")) {
+                openDoor(nextCell);
+            }else{
+                battle(nextCell.getActor());
+            }
         }
     }
 
@@ -40,6 +47,20 @@ public abstract class Actor implements Drawable {
             this.health -= enemy.attack - this.defense;
         } else {
             enemy.getCell().setActor(null);
+        }
+        if (this.health <= 0){
+            System.out.println("GAME OVER");
+        }
+    }
+
+    public void openDoor(Cell cell){
+        for (Item item:inventory) {
+            if(item instanceof Key){
+                cell.setActor(null);
+                cell.setEnvironment(new OpenDoor(cell));
+                inventory.remove(item);
+                break;
+            }
         }
     }
 
@@ -67,4 +88,5 @@ public abstract class Actor implements Drawable {
     public List<Item> getInventory() {
         return inventory;
     }
+
 }
