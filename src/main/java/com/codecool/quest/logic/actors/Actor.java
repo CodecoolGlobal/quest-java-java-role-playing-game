@@ -127,6 +127,10 @@ public abstract class Actor implements Drawable {
         return health;
     }
 
+    public int getDefense() {
+        return defense;
+    }
+
     public boolean isDead() {
         return isDead;
     }
