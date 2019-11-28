@@ -5,6 +5,7 @@ import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.environment.Environment;
 import com.codecool.quest.logic.environment.OpenDoor;
+import com.codecool.quest.logic.environment.Remains;
 import com.codecool.quest.logic.items.Apple;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
@@ -19,6 +20,7 @@ public abstract class Actor implements Drawable {
     private Cell cell;
     private List<Item> inventory = new ArrayList<>();
     private int health;
+    private final int originalHealth = 20;
     private int attack;
     private int defense;
 
@@ -61,7 +63,9 @@ public abstract class Actor implements Drawable {
         } else {
             enemy.getCell().setActor(null);
             MapLoader.skeletons.remove(enemy);
+            enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
         }
+
         if (this.health <= 0) {
             System.out.println("GAME OVER");
         }
@@ -80,10 +84,13 @@ public abstract class Actor implements Drawable {
 
     public void pickUp() {
         if (cell.getItem() != null) {
-            inventory.add(cell.getItem());
-            if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
-                this.health = this.health + cell.getItem().getHealingAmount();
-                inventory.remove(cell.getItem()); // should be checked, maybe use item method instead of remove
+            if (!isHealingItem(cell.getItem())) {
+                inventory.add(cell.getItem());
+            } else if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
+                health = this.health + cell.getItem().getHealingAmount();
+                if (health > originalHealth) {
+                    health = originalHealth;
+                }
             }
             cell.setItem(null);
         }

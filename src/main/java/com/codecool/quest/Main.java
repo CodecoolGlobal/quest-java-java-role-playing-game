@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -106,7 +107,7 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                } else if (cell.getEnvironment() != null) {
+                } else if (cell.getEnvironment() != null && Objects.isNull(cell.getItem())) {
                     Tiles.drawTile(context, cell.getEnvironment(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);
@@ -143,7 +144,7 @@ public class Main extends Application {
 
     private int getRandomNumber(){
         Random r = new Random();
-        int random = r.nextInt(3)-1;
+        int random = r.nextInt(2)-1;
         return random;
     }
 }
