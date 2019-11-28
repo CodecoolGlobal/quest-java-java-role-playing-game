@@ -61,9 +61,14 @@ public abstract class Actor implements Drawable {
         if (enemy.health > 0) {
             this.health -= enemy.attack - this.defense;
         } else {
-            enemy.getCell().setActor(null);
-            MapLoader.skeletons.remove(enemy);
-            enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
+            if(enemy.getTileName().equals("ogre")){
+                enemy.getCell().setActor(null);
+                enemy.getCell().setItem(new Key(cell));
+            } else {
+                enemy.getCell().setActor(null);
+                MapLoader.skeletons.remove(enemy);
+                enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
+            }
         }
 
         if (this.health <= 0) {
@@ -85,7 +90,12 @@ public abstract class Actor implements Drawable {
     public void pickUp() {
         if (cell.getItem() != null) {
             if (!isHealingItem(cell.getItem())) {
-                inventory.add(cell.getItem());
+                if (cell.getItem().getDefenseAmount() > 0) {
+                    this.defense += cell.getItem().getDefenseAmount();
+                    inventory.add(cell.getItem());
+                } else {
+                    inventory.add(cell.getItem());
+                }
             } else if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
                 health = this.health + cell.getItem().getHealingAmount();
                 if (health > originalHealth) {

@@ -35,6 +35,7 @@ public class Tiles {
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("ogre", new Tile(30,6));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));

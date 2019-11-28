@@ -6,9 +6,11 @@ import com.codecool.quest.logic.Drawable;
 public abstract class Item implements Drawable {
     private Cell cell;
     private int healingAmount;
+    private int defenseAmount;
 
-    public Item(Cell cell, int healingAmount) {
+    public Item(Cell cell, int healingAmount, int defenseAmount) {
         this.healingAmount = healingAmount;
+        this.defenseAmount = defenseAmount;
         this.cell = cell;
         this.cell.setItem(this);
     }
@@ -19,6 +21,10 @@ public abstract class Item implements Drawable {
 
     public int getHealingAmount() {
         return healingAmount;
+    }
+
+    public int getDefenseAmount() {
+        return defenseAmount;
     }
 
     public int getX() {

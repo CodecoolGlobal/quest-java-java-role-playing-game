@@ -5,7 +5,7 @@ import com.codecool.quest.logic.items.Item;
 
 public class Shield extends Item {
     public Shield(Cell cell) {
-        super(cell, 0);
+        super(cell, 0, 2);
     }
 
     @Override

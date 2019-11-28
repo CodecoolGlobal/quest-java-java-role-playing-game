@@ -1,6 +1,7 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Door;
+import com.codecool.quest.logic.actors.Ogre;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Apple;
@@ -67,6 +68,9 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new Apple(cell);
                             break;
+                        case 'o':
+                            cell.setType(CellType.FLOOR);
+                            map.setOgre(new Ogre(cell));
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

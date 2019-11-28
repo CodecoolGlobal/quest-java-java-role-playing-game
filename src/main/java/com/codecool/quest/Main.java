@@ -144,7 +144,7 @@ public class Main extends Application {
 
     private int getRandomNumber(){
         Random r = new Random();
-        int random = r.nextInt(2)-1;
+        int random = r.nextInt(3)-1;
         return random;
     }
 }
