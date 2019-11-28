@@ -43,6 +43,7 @@ public class MapLoader {
                             break;
                         case '.':
                             cell.setType(CellType.FLOOR);
+                            new Floor(cell);
                             break;
                         case 'I':
                             cell.setType(CellType.FLOOR);
@@ -103,16 +104,19 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
+                            new Floor(cell);
                             map.setSkeleton(skeleton);
                             skeletons.add(skeleton);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
+                            new Floor(cell);
                             break;
                         case 'S':
                             cell.setType(CellType.FLOOR);
                             new Shield(cell);
+                            new Floor(cell);
                             break;
                         case 'D':
                             cell.setType(CellType.FLOOR);
@@ -125,14 +129,17 @@ public class MapLoader {
                         case 'a':
                             cell.setType(CellType.FLOOR);
                             new Apple(cell);
+                            new Floor(cell);
                             break;
                         case 'H':
                             cell.setType(CellType.FLOOR);
                             new Helm(cell);
+                            new Floor(cell);
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
                             map.setOgre(new Ogre(cell));
+                            new Floor(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

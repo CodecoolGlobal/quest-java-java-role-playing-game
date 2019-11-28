@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.environment.Environment;
 import com.codecool.quest.logic.environment.OpenDoor;
@@ -39,12 +40,20 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-            nextCell.setFog(null);
+            clearSky();
         } else if (!Objects.isNull(nextCell.getActor())) {
             if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);
             } else {
                 battle(nextCell.getActor());
+            }
+        }
+    }
+
+    public void clearSky() {
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                cell.getNeighbor(i, j).setFog(null);
             }
         }
     }

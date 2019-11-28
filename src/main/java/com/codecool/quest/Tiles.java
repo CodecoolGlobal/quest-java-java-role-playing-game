@@ -45,6 +45,7 @@ public class Tiles {
         tileMap.put("wallUp", new Tile(19,0));
         tileMap.put("stoneFloor", new Tile(19,1));
         tileMap.put("bonfire", new Tile(14,10));
+        tileMap.put("fog", new Tile(0,0));
         //Actors
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));
