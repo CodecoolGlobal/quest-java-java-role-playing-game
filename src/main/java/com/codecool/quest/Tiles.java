@@ -28,9 +28,23 @@ public class Tiles {
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(10, 17));
         tileMap.put("floor", new Tile(2, 0));
+        tileMap.put("grass1", new Tile(5, 0));
+        tileMap.put("grass2", new Tile(0, 2));
+        tileMap.put("trees", new Tile(3, 1));
+        tileMap.put("tree", new Tile(4, 2));
+        tileMap.put("treeTrunk", new Tile(20, 6));
         tileMap.put("closedDoor", new Tile(3,9));
         tileMap.put("openDoor", new Tile(6,9));
         tileMap.put("monsterRemains", new Tile(0,15));
+        tileMap.put("bridge", new Tile(6,5));
+        tileMap.put("water", new Tile(8,4));
+        tileMap.put("wallDown", new Tile(19,2));
+        tileMap.put("wallLeftDownCorner", new Tile(18,2));
+        tileMap.put("wallLeft", new Tile(18,1));
+        tileMap.put("wallLeftTopCorner", new Tile(18,0));
+        tileMap.put("wallUp", new Tile(19,0));
+        tileMap.put("stoneFloor", new Tile(19,1));
+        tileMap.put("bonfire", new Tile(14,10));
         //Actors
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));

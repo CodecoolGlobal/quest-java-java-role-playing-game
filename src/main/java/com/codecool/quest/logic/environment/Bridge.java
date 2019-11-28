@@ -1,4 +1,15 @@
 package com.codecool.quest.logic.environment;
 
-public class Bridge {
+import com.codecool.quest.logic.Cell;
+
+public class Bridge extends Environment {
+
+    public Bridge(Cell cell){
+        super(cell);
+    }
+
+    public String getTileName() {
+        return "bridge";
+    }
 }
+

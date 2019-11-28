@@ -1,4 +1,14 @@
 package com.codecool.quest.logic.environment;
 
-public class WallDown {
+import com.codecool.quest.logic.Cell;
+
+public class WallDown extends Environment {
+
+    public WallDown(Cell cell){
+        super(cell);
+    }
+
+    public String getTileName() {
+        return "wallDown";
+    }
 }

@@ -2,9 +2,9 @@ package com.codecool.quest.logic.environment;
 
 import com.codecool.quest.logic.Cell;
 
-public class Grass1 extends Environment {
+public class GrassOne extends Environment {
 
-    public Grass1(Cell cell){
+    public GrassOne(Cell cell){
         super(cell);
     }
 

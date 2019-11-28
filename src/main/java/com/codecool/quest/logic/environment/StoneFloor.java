@@ -1,4 +1,14 @@
 package com.codecool.quest.logic.environment;
 
-public class StoneFloor {
+import com.codecool.quest.logic.Cell;
+
+public class StoneFloor extends Environment {
+
+    public StoneFloor(Cell cell){
+        super(cell);
+    }
+
+    public String getTileName() {
+        return "stoneFloor";
+    }
 }
