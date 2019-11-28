@@ -117,7 +117,7 @@ public class Main extends Application {
 
     }
 
-    private void labelRefresh(){
+    private void labelRefresh() {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         inventory.getItems().clear();
         for (Item item : map.getPlayer().getInventory()) {
@@ -127,10 +127,10 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement(){
-        while(true) {
+    private void aiMovement() {
+        while (true) {
             ListIterator<Skeleton> list_Iter = MapLoader.skeletons.listIterator(0);
-            while (list_Iter.hasNext()){
+            while (list_Iter.hasNext()) {
                 list_Iter.next().monsterMove(getRandomNumber(), getRandomNumber());
                 refresh();
                 try {
@@ -142,13 +142,8 @@ public class Main extends Application {
         }
     }
 
-    private int getRandomNumber(){
+    private int getRandomNumber() {
         Random r = new Random();
-<<<<<<< HEAD
-        return r.nextInt(3)-1;
-=======
-        int random = r.nextInt(3)-1;
-        return random;
->>>>>>> 7a8329f17148f2351f8bd0333cc46e1500f1fcb8
+        return r.nextInt(3) - 1;
     }
 }

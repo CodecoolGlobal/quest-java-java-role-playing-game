@@ -14,8 +14,8 @@ tiiIi..iIiI.~.iI.Ii....It
 |IiiI..iIii.~.i..i...k.i|
 T|iIi...S.t.~|tTTtTt|tT|t
 tIiiI...iiT.~.i..I.iiI..T
-TiiiI...IIi.~.i..Ii."MMMM
-T|i.....iiI.~...I...l$$$$
-|Ii*....IIi.~.iIiIii,WDWW
-tT@IiiiI....b...........t
+TiiiIi..IIi.~.i..Ii."MMMM
+T|......iiI.~...I...l$$$$
+|I.*....IIi.~.iIiIii,WDWW
+tT@...iI....b...........t
 |ttTTt|t|tTt~TttttTTttTtT
