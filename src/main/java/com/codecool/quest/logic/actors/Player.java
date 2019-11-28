@@ -18,6 +18,14 @@ public class Player extends Actor {
         for (Item item : getInventory()) {
             strInventory.add(item.getTileName());
         }
+
+        if (strInventory.contains("shield") && strInventory.contains("helm")) {
+            return "playerWithShieldAndHelm";
+        } else if (strInventory.contains("shield")) {
+            return "playerWithShield";
+        } else if (strInventory.contains("helm")) {
+            return "playerWithHelm";
+        }
         return "player";
     }
 }
