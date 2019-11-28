@@ -98,6 +98,18 @@ public class MapLoader {
                             cell.setType(CellType.WALL);
                             new Bonfire(cell);
                             break;
+                        case 'n':
+                            cell.setType(CellType.WALL);
+                            new Sign(cell);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.WALL);
+                            new House(cell);
+                            break;
+                        case 'v':
+                            cell.setType(CellType.WALL);
+                            new Boat(cell);
+                            break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
