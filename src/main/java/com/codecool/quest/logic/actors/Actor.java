@@ -23,6 +23,7 @@ public abstract class Actor implements Drawable {
     private final int originalHealth = 20;
     private int attack;
     private int defense;
+    private boolean isDead = false;
 
     public Actor(Cell cell, int health, int attack, int defense) {
         this.cell = cell;
@@ -62,7 +63,7 @@ public abstract class Actor implements Drawable {
             this.health -= enemy.attack - this.defense;
         } else {
             enemy.getCell().setActor(null);
-            MapLoader.skeletons.remove(enemy);
+            enemy.isDead = true;
             enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
         }
 
@@ -108,6 +109,10 @@ public abstract class Actor implements Drawable {
 
     public int getHealth() {
         return health;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 
     public Cell getCell() {

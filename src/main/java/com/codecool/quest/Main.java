@@ -127,17 +127,17 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement() {
-        while (true) {
-            ListIterator<Skeleton> list_Iter = MapLoader.skeletons.listIterator(0);
-            while (list_Iter.hasNext()) {
-                list_Iter.next().monsterMove(getRandomNumber(), getRandomNumber());
-                refresh();
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    private void aiMovement(){
+        while(true) {
+            for (Skeleton skeleton: MapLoader.skeletons) {
+                if (!skeleton.isDead())
+                    skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+            }
+            refresh();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }
