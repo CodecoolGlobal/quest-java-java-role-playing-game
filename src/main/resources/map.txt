@@ -1,21 +1,21 @@
 25 20
-#############
-#k..........#    ########
-#...s...s...######......#
-#.............D......S..#
-#...........######......#
-#.....s.....#    #......#
-#...........#    #......#
-#.........a.#    #......#
-#####..######    ###..###
-    #..#           #..#
-    #..#           #..#
-    #..#          ##..##
-  ###..####      #......#
-  #..@....#      #......#
-  #.......#      #......#
-  #.......#      #......#
-  #.......#      #......#
-  #.......#      #......#
-  #.......#      #......#
-  #########       ######
+TtT|ttT|TT|t~TttTtttTtTt|
+Ti.I.i.iIi..~..i.ii.iItTt
+Ti..s...s...b.........Hit
+TtIii...II..~.IitI.....I|
+tTiIi..iII..~.iITi.....it
+TI.Ii.siII..~.iiIit....It
+|ti.i...iI..~.iIiiT....iT
+TTiii.iI..a.~.iIiit....it
+Tiiii..IiiT.~.iiIi.I..iTi
+TiiIi..iIit.~.iIiIi....It
+TIIii..i iT.~.IiI.I..i.it
+tiiIi..iIiI.~.iI.Ii....It
+|IiiI..iIii.~.i..i...k.i|
+T|iIi...S.t.~|tTTtTt|tT|t
+tIiiI...iiT.~.i..I.iiI..T
+TiiiIi..IIi.~.i..Ii."MMMM
+T|......iiI.~...I...l$$$$
+|I.*....IIi.~.iIiIii,WDWW
+tT@...iI....b...........t
+|ttTTt|t|tTt~TttttTTttTtT

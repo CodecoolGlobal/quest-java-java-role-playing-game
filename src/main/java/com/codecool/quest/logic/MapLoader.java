@@ -4,13 +4,14 @@ import com.codecool.quest.logic.actors.Door;
 import com.codecool.quest.logic.actors.Ogre;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.environment.*;
 import com.codecool.quest.logic.items.Apple;
+import com.codecool.quest.logic.items.Helm;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Shield;
 
 
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -42,6 +43,62 @@ public class MapLoader {
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
+                        case 'I':
+                            cell.setType(CellType.FLOOR);
+                            new GrassOne(cell);
+                            break;
+                        case 'i':
+                            cell.setType(CellType.FLOOR);
+                            new GrassTwo(cell);
+                            break;
+                        case 'T':
+                            cell.setType(CellType.WALL);
+                            new Trees(cell);
+                            break;
+                        case 't':
+                            cell.setType(CellType.WALL);
+                            new Tree(cell);
+                            break;
+                        case '|':
+                            cell.setType(CellType.WALL);
+                            new TreeTrunk(cell);
+                            break;
+                        case 'W':
+                            cell.setType(CellType.WALL);
+                            new WallDown(cell);
+                            break;
+                        case ',':
+                            cell.setType(CellType.WALL);
+                            new WallLeftDownCorner(cell);
+                            break;
+                        case 'l':
+                            cell.setType(CellType.WALL);
+                            new WallLeft(cell);
+                            break;
+                        case '"':
+                            cell.setType(CellType.WALL);
+                            new WallLeftTopCorner(cell);
+                            break;
+                        case 'M':
+                            cell.setType(CellType.WALL);
+                            new WallUp(cell);
+                            break;
+                        case '$':
+                            cell.setType(CellType.FLOOR);
+                            new StoneFloor(cell);
+                            break;
+                        case 'b':
+                            cell.setType(CellType.FLOOR);
+                            new Bridge(cell);
+                            break;
+                        case '~':
+                            cell.setType(CellType.WALL);
+                            new Water(cell);
+                            break;
+                        case '*':
+                            cell.setType(CellType.WALL);
+                            new Bonfire(cell);
+                            break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
@@ -67,6 +124,10 @@ public class MapLoader {
                         case 'a':
                             cell.setType(CellType.FLOOR);
                             new Apple(cell);
+                            break;
+                        case 'H':
+                            cell.setType(CellType.FLOOR);
+                            new Helm(cell);
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
