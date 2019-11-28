@@ -48,11 +48,14 @@ public class Tiles {
         //Actors
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));
+        tileMap.put("playerWithHelm", new Tile(30,0));
+        tileMap.put("playerWithShieldAndHelm", new Tile(28,0));
         tileMap.put("skeleton", new Tile(29, 6));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));
         tileMap.put("apple", new Tile(15,29));
+        tileMap.put("helm", new Tile(4, 22));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

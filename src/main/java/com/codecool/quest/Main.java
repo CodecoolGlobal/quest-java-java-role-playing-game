@@ -144,6 +144,11 @@ public class Main extends Application {
 
     private int getRandomNumber(){
         Random r = new Random();
+<<<<<<< HEAD
         return r.nextInt(3)-1;
+=======
+        int random = r.nextInt(3)-1;
+        return random;
+>>>>>>> 7a8329f17148f2351f8bd0333cc46e1500f1fcb8
     }
 }
