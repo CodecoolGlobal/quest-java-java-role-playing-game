@@ -6,6 +6,7 @@ import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -139,11 +140,10 @@ public class Main extends Application {
             }
         }
     }
+
     private int getRandomNumber(){
         Random r = new Random();
         int random = r.nextInt(3)-1;
-        System.out.println(random);
         return random;
-
     }
 }

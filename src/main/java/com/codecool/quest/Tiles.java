@@ -31,11 +31,13 @@ public class Tiles {
         tileMap.put("closedDoor", new Tile(3,9));
         tileMap.put("openDoor", new Tile(6,9));
         //Actors
-        tileMap.put("player", new Tile(27, 0));
+        tileMap.put("player", new Tile(25, 0));
+        tileMap.put("playerWithShield", new Tile(27, 0));
         tileMap.put("skeleton", new Tile(29, 6));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));
+        tileMap.put("apple", new Tile(15,29));
 
     }
 

@@ -5,10 +5,13 @@ import com.codecool.quest.logic.Drawable;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.environment.Environment;
 import com.codecool.quest.logic.environment.OpenDoor;
+import com.codecool.quest.logic.items.Apple;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,16 +30,16 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
-    public void move(int dx, int dy){
+    public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (Objects.isNull(nextCell.getActor()) && !nextCell.getTileName().equals("wall")){
+        if (Objects.isNull(nextCell.getActor()) && !nextCell.getTileName().equals("wall")) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        }else if (!Objects.isNull(nextCell.getActor())) {
-            if(nextCell.getActor().getTileName().equals("closedDoor")) {
+        } else if (!Objects.isNull(nextCell.getActor())) {
+            if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);
-            }else{
+            } else {
                 battle(nextCell.getActor());
             }
         }
@@ -59,14 +62,14 @@ public abstract class Actor implements Drawable {
             enemy.getCell().setActor(null);
             MapLoader.skeletons.remove(enemy);
         }
-        if (this.health <= 0){
+        if (this.health <= 0) {
             System.out.println("GAME OVER");
         }
     }
 
-    public void openDoor(Cell cell){
-        for (Item item:inventory) {
-            if(item instanceof Key){
+    public void openDoor(Cell cell) {
+        for (Item item : inventory) {
+            if (item instanceof Key) {
                 cell.setActor(null);
                 cell.setEnvironment(new OpenDoor(cell));
                 inventory.remove(item);
@@ -76,10 +79,24 @@ public abstract class Actor implements Drawable {
     }
 
     public void pickUp() {
-        if(cell.getItem() != null) {
+        if (cell.getItem() != null) {
             inventory.add(cell.getItem());
+            if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
+                this.health = this.health + cell.getItem().getHealingAmount();
+                inventory.remove(cell.getItem()); // should be checked, maybe use item method instead of remove
+            }
             cell.setItem(null);
         }
+    }
+
+    private boolean isHealingItem(Object cell) {
+        Class<?> objectClass = cell.getClass();
+        for (Field field : objectClass.getFields()) {
+            if (field.getName().equals("healingItem")) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public int getHealth() {
