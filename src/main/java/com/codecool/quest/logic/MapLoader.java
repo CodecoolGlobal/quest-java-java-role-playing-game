@@ -132,6 +132,7 @@ public class MapLoader {
                         case 'o':
                             cell.setType(CellType.FLOOR);
                             map.setOgre(new Ogre(cell));
+                            break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }

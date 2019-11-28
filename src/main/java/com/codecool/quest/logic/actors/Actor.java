@@ -60,10 +60,13 @@ public abstract class Actor implements Drawable {
         enemy.health -= this.attack - enemy.defense;
         if (enemy.health > 0) {
             this.health -= enemy.attack - this.defense;
+            if(this.health > 20){
+                this.health = 20;
+            }
         } else {
             if(enemy.getTileName().equals("ogre")){
                 enemy.getCell().setActor(null);
-                enemy.getCell().setItem(new Key(cell));
+                enemy.getCell().setItem(new Key(enemy.getCell()));
             } else {
                 enemy.getCell().setActor(null);
                 MapLoader.skeletons.remove(enemy);
