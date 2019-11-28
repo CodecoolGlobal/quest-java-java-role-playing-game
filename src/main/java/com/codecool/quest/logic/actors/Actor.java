@@ -39,6 +39,7 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+            nextCell.setFog(null);
         } else if (!Objects.isNull(nextCell.getActor())) {
             if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);

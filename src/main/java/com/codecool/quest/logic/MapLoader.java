@@ -33,6 +33,7 @@ public class MapLoader {
             for (int x = 0; x < width; x++) {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
+                    cell.setFog(new Fog(cell));
                     switch (line.charAt(x)) {
                         case ' ':
                             cell.setType(CellType.EMPTY);

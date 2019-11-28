@@ -112,6 +112,9 @@ public class Main extends Application {
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
+                if (cell.getFog() != null) {
+                    Tiles.drawTile(context, cell.getFog(), x, y);
+                }
             }
         }
 
