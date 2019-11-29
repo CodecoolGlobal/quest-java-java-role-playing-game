@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.environment.Environment;
 import com.codecool.quest.logic.environment.OpenDoor;
@@ -23,6 +24,7 @@ public abstract class Actor implements Drawable {
     private final int originalHealth = 20;
     private int attack;
     private int defense;
+    private boolean isDead = false;
 
     public Actor(Cell cell, int health, int attack, int defense) {
         this.cell = cell;
@@ -38,11 +40,20 @@ public abstract class Actor implements Drawable {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+            visionRadius();
         } else if (!Objects.isNull(nextCell.getActor())) {
             if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);
             } else {
                 battle(nextCell.getActor());
+            }
+        }
+    }
+
+    public void visionRadius() {
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                cell.getNeighbor(i, j).setFog(null);
             }
         }
     }
@@ -60,10 +71,21 @@ public abstract class Actor implements Drawable {
         enemy.health -= this.attack - enemy.defense;
         if (enemy.health > 0) {
             this.health -= enemy.attack - this.defense;
+            if(this.health > originalHealth){
+                this.health = originalHealth;
+            }
         } else {
             enemy.getCell().setActor(null);
-            MapLoader.skeletons.remove(enemy);
+            enemy.isDead = true;
             enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
+            if(enemy.getTileName().equals("ogre")){
+                enemy.getCell().setActor(null);
+                enemy.getCell().setItem(new Key(enemy.getCell()));
+            } else {
+                enemy.getCell().setActor(null);
+                MapLoader.skeletons.remove(enemy);
+                enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
+            }
         }
 
         if (this.health <= 0) {
@@ -85,8 +107,13 @@ public abstract class Actor implements Drawable {
     public void pickUp() {
         if (cell.getItem() != null) {
             if (!isHealingItem(cell.getItem())) {
-                inventory.add(cell.getItem());
-            } else if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
+                if (cell.getItem().getDefenseAmount() > 0) {
+                    this.defense += cell.getItem().getDefenseAmount();
+                    inventory.add(cell.getItem());
+                } else {
+                    inventory.add(cell.getItem());
+                }
+            } else if (isHealingItem(cell.getItem()) && this.health < originalHealth) {
                 health = this.health + cell.getItem().getHealingAmount();
                 if (health > originalHealth) {
                     health = originalHealth;
@@ -108,6 +135,10 @@ public abstract class Actor implements Drawable {
 
     public int getHealth() {
         return health;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 
     public Cell getCell() {

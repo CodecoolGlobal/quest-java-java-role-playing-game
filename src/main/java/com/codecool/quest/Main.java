@@ -19,9 +19,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -58,6 +55,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
+        map.getPlayer().visionRadius();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -112,6 +110,9 @@ public class Main extends Application {
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
+                if (cell.getFog() != null) {
+                    Tiles.drawTile(context, cell.getFog(), x, y);
+                }
             }
         }
 
@@ -127,17 +128,17 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement() {
-        while (true) {
-            ListIterator<Skeleton> list_Iter = MapLoader.skeletons.listIterator(0);
-            while (list_Iter.hasNext()) {
-                list_Iter.next().monsterMove(getRandomNumber(), getRandomNumber());
-                refresh();
-                try {
-                    Thread.sleep(200);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+    private void aiMovement(){
+        while(true) {
+            for (Skeleton skeleton: MapLoader.skeletons) {
+                if (!skeleton.isDead())
+                    skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+            }
+            refresh();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
     }

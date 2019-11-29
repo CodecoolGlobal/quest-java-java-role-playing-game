@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 
 public class Helm extends Item{
     public Helm(Cell cell) {
-        super(cell, 0);
+        super(cell, 0, 2);
     }
 
     @Override

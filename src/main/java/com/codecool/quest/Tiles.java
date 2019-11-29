@@ -48,12 +48,14 @@ public class Tiles {
         tileMap.put("sign", new Tile(0,7));
         tileMap.put("house", new Tile(8,20));
         tileMap.put("boat", new Tile(9,19));
+        tileMap.put("fog", new Tile(0,0));
         //Actors
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));
         tileMap.put("playerWithHelm", new Tile(30,0));
         tileMap.put("playerWithShieldAndHelm", new Tile(28,0));
         tileMap.put("skeleton", new Tile(29, 6));
+        tileMap.put("ogre", new Tile(30,6));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));

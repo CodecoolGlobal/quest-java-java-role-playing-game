@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 
 public class Key extends Item {
     public Key(Cell cell){
-        super(cell, 0);
+        super(cell, 0, 0);
     }
 
     public String getTileName() {

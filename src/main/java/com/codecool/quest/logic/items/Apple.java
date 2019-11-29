@@ -7,7 +7,7 @@ public class Apple extends Item {
 
 
     public Apple(Cell cell){
-        super(cell, 2);
+        super(cell, 2, 0);
     }
 
     public String getTileName() {

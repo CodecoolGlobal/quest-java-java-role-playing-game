@@ -1,6 +1,7 @@
 package com.codecool.quest.logic;
 
 import com.codecool.quest.logic.actors.Door;
+import com.codecool.quest.logic.actors.Ogre;
 import com.codecool.quest.logic.actors.Player;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.environment.*;
@@ -32,6 +33,7 @@ public class MapLoader {
             for (int x = 0; x < width; x++) {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
+                    cell.setFog(new Fog(cell));
                     switch (line.charAt(x)) {
                         case ' ':
                             cell.setType(CellType.EMPTY);
@@ -41,6 +43,7 @@ public class MapLoader {
                             break;
                         case '.':
                             cell.setType(CellType.FLOOR);
+                            new Floor(cell);
                             break;
                         case 'I':
                             cell.setType(CellType.FLOOR);
@@ -113,16 +116,19 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
+                            new Floor(cell);
                             map.setSkeleton(skeleton);
                             skeletons.add(skeleton);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
+                            new Floor(cell);
                             break;
                         case 'S':
                             cell.setType(CellType.FLOOR);
                             new Shield(cell);
+                            new Floor(cell);
                             break;
                         case 'D':
                             cell.setType(CellType.FLOOR);
@@ -135,10 +141,17 @@ public class MapLoader {
                         case 'a':
                             cell.setType(CellType.FLOOR);
                             new Apple(cell);
+                            new Floor(cell);
                             break;
                         case 'H':
                             cell.setType(CellType.FLOOR);
                             new Helm(cell);
+                            new Floor(cell);
+                            break;
+                        case 'o':
+                            cell.setType(CellType.FLOOR);
+                            map.setOgre(new Ogre(cell));
+                            new Floor(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
