@@ -70,9 +70,8 @@ public abstract class Actor implements Drawable {
     public void battle(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
         if (enemy.health > 0) {
-            this.health -= enemy.attack - this.defense;
-            if(this.health > 20){
-                this.health = 20;
+            if(enemy.attack - this.defense > 0) {
+                this.health -= enemy.attack - this.defense;
             }
         } else {
             enemy.getCell().setActor(null);
