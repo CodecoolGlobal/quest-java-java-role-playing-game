@@ -58,6 +58,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
+        map.getPlayer().visionRadius();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -134,7 +135,7 @@ public class Main extends Application {
         while(true) {
             for (Skeleton skeleton: MapLoader.skeletons) {
                 if (!skeleton.isDead())
-                    skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+                    skeleton.move(getRandomNumber(), getRandomNumber());
             }
             refresh();
             try {
