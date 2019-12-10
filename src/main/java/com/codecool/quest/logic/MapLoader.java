@@ -43,80 +43,71 @@ public class MapLoader {
                             break;
                         case '.':
                             cell.setType(CellType.FLOOR);
-                            new Floor(cell);
                             break;
                         case 'I':
-                            cell.setType(CellType.FLOOR);
-                            new GrassOne(cell);
+                            cell.setType(CellType.GRASSONE);
                             break;
                         case 'i':
-                            cell.setType(CellType.FLOOR);
-                            new GrassTwo(cell);
+                            cell.setType(CellType.GRASSTWO);
                             break;
                         case 'T':
-                            cell.setType(CellType.WALL);
-                            new Trees(cell);
+                            cell.setType(CellType.TREES);
                             break;
                         case 't':
-                            cell.setType(CellType.WALL);
-                            new Tree(cell);
+                            cell.setType(CellType.TREE);
                             break;
                         case '|':
-                            cell.setType(CellType.WALL);
-                            new TreeTrunk(cell);
+                            cell.setType(CellType.TREETRUNK);
                             break;
                         case 'W':
-                            cell.setType(CellType.WALL);
-                            new WallDown(cell);
+                            cell.setType(CellType.WALLDOWN);
                             break;
                         case ',':
-                            cell.setType(CellType.WALL);
-                            new WallLeftDownCorner(cell);
+                            cell.setType(CellType.WALLLEFTDOWNCORNER);
                             break;
                         case 'l':
-                            cell.setType(CellType.WALL);
-                            new WallLeft(cell);
+                            cell.setType(CellType.WALLLEFT);
                             break;
                         case '"':
-                            cell.setType(CellType.WALL);
-                            new WallLeftTopCorner(cell);
+                            cell.setType(CellType.WALLLEFTTOPCORNER);
                             break;
                         case 'M':
-                            cell.setType(CellType.WALL);
-                            new WallUp(cell);
+                            cell.setType(CellType.WALLUP);
                             break;
                         case '$':
-                            cell.setType(CellType.FLOOR);
-                            new StoneFloor(cell);
+                            cell.setType(CellType.STONEFLOOR);
                             break;
                         case 'b':
-                            cell.setType(CellType.FLOOR);
-                            new Bridge(cell);
+                            cell.setType(CellType.BRIDGE);
                             break;
                         case '~':
-                            cell.setType(CellType.WALL);
-                            new Water(cell);
+                            cell.setType(CellType.WATER);
                             break;
                         case '*':
-                            cell.setType(CellType.WALL);
-                            new Bonfire(cell);
+                            cell.setType(CellType.BONFIRE);
+                            break;
+                        case 'h':
+                            cell.setType(CellType.HOUSE);
+                            break;
+                        case 'v':
+                            cell.setType(CellType.BOAT);
+                            break;
+                        case 'n':
+                            cell.setType(CellType.SIGN);
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
-                            new Floor(cell);
                             map.setSkeleton(skeleton);
                             skeletons.add(skeleton);
                             break;
                         case '@':
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
-                            new Floor(cell);
                             break;
                         case 'S':
                             cell.setType(CellType.FLOOR);
                             new Shield(cell);
-                            new Floor(cell);
                             break;
                         case 'D':
                             cell.setType(CellType.FLOOR);
@@ -129,17 +120,14 @@ public class MapLoader {
                         case 'a':
                             cell.setType(CellType.FLOOR);
                             new Apple(cell);
-                            new Floor(cell);
                             break;
                         case 'H':
                             cell.setType(CellType.FLOOR);
                             new Helm(cell);
-                            new Floor(cell);
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
                             map.setOgre(new Ogre(cell));
-                            new Floor(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

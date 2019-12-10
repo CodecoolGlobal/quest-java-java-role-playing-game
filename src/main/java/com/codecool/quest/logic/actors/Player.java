@@ -1,9 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.environment.OpenDoor;
-import com.codecool.quest.logic.environment.Remains;
+import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 
@@ -47,7 +45,7 @@ public class Player extends Actor implements Moveable {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (Objects.isNull(nextCell.getActor()) && !nextCell.getTileName().equals("wall")) {
+        if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -70,7 +68,7 @@ public class Player extends Actor implements Moveable {
         } else {
             enemy.getCell().setActor(null);
             enemy.isDead = true;
-            enemy.getCell().setEnvironment(new Remains(enemy.getCell()));
+            enemy.getCell().setType(CellType.REMAINS);
             if(enemy.getTileName().equals("ogre")){
                 enemy.getCell().setActor(null);
                 enemy.getCell().setItem(new Key(enemy.getCell()));
@@ -86,7 +84,7 @@ public class Player extends Actor implements Moveable {
         for (Item item : inventory) {
             if (item instanceof Key) {
                 cell.setActor(null);
-                cell.setEnvironment(new OpenDoor(cell));
+                cell.setType(CellType.OPENDOOR);
                 inventory.remove(item);
                 break;
             }
@@ -102,7 +100,7 @@ public class Player extends Actor implements Moveable {
                 } else {
                     inventory.add(cell.getItem());
                 }
-            } else if (isHealingItem(cell.getItem()) && this.health < 20) { // need better health check, don't go above a number
+            } else if (isHealingItem(cell.getItem()) && this.health < 20) {
                 health = this.health + cell.getItem().getHealingAmount();
                 if (health > originalHealth) {
                     health = originalHealth;

@@ -17,7 +17,7 @@ public class Skeleton extends Actor implements Moveable {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (Objects.isNull(nextCell.getActor()) && !nextCell.getTileName().equals("wall")) {
+        if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
