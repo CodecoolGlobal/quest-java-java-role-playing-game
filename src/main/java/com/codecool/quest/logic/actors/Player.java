@@ -1,7 +1,6 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 
@@ -43,6 +42,11 @@ public class Player extends Actor implements Moveable {
     }
 
     @Override
+    public void die(Cell cell) {
+        System.out.println("Game over mf");
+    }
+
+    @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
@@ -66,25 +70,17 @@ public class Player extends Actor implements Moveable {
                 this.health -= enemy.attack - this.defense;
             }
         } else {
-            enemy.getCell().setActor(null);
-            enemy.isDead = true;
-            enemy.getCell().setType(CellType.REMAINS);
-            if(enemy.getTileName().equals("ogre")){
-                enemy.getCell().setActor(null);
-                enemy.getCell().setItem(new Key(enemy.getCell()));
-            }
+            enemy.die(enemy.getCell());
         }
-
         if (this.health <= 0) {
-            System.out.println("GAME OVER");
+            die(this.cell);
         }
     }
 
     private void openDoor(Cell cell) {
         for (Item item : inventory) {
             if (item instanceof Key) {
-                cell.setActor(null);
-                cell.setType(CellType.OPENDOOR);
+                cell.getActor().die(cell);
                 inventory.remove(item);
                 break;
             }

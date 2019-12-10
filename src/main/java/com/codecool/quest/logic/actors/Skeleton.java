@@ -1,6 +1,8 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.items.Item;
 
 import java.util.Objects;
 
@@ -22,6 +24,13 @@ public class Skeleton extends Actor implements Moveable {
             nextCell.setActor(this);
             cell = nextCell;
         }
-
     }
+
+    @Override
+    public void die(Cell cell) {
+        cell.setActor(null);
+        this.isDead = true;
+        cell.setType(CellType.REMAINS);
+    }
+
 }
