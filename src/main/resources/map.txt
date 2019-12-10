@@ -1,6 +1,6 @@
 25 20
 TtT|ttT|TT|t~TttTttt,WWWW
-Ti.I.i.iIi..~..i.ii.iItTt
+Ti.I.i.iIi..~..i.ii.iIiit
 Ti..s...s...b......iIiHit
 TtIii...II..~.IitI...iiI|
 tTiIi..iII..~.iITi...iIit
@@ -9,7 +9,7 @@ TI.Ii.siII.v~.iiIit...iIt
 TTiii.iI..a.~.iIiit....it
 Tiiii..IiiT.~.iiIi.I..iTi
 TiiIi..iIit.~.iIiIi....It
-TIIii..i iT.~.IiI.I..i.it
+TIIii..iIiT.~.IiI.I..i.it
 tiiIi..iIiI.~.iI.Ii....It
 |IiiI..iIii.~.i..i...o.i|
 T|iIi...S.t.~|tTTtTt|tT|t

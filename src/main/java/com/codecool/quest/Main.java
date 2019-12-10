@@ -105,8 +105,6 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getActor(), x, y);
                 } else if (cell.getItem() != null) {
                     Tiles.drawTile(context, cell.getItem(), x, y);
-                } else if (cell.getEnvironment() != null && Objects.isNull(cell.getItem())) {
-                    Tiles.drawTile(context, cell.getEnvironment(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
@@ -132,7 +130,7 @@ public class Main extends Application {
         while(true) {
             for (Skeleton skeleton: MapLoader.skeletons) {
                 if (!skeleton.isDead())
-                    skeleton.monsterMove(getRandomNumber(), getRandomNumber());
+                    skeleton.move(getRandomNumber(), getRandomNumber());
             }
             refresh();
             try {

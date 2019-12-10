@@ -1,17 +1,42 @@
 package com.codecool.quest.logic;
 
 public enum CellType {
-    EMPTY("empty"),
-    FLOOR("floor"),
-    WALL("wall");
+    EMPTY("empty", true),
+    WALL("wall", false),
+    BONFIRE("bonfire", false),
+    BRIDGE("bridge",true),
+    BOAT("boat",false),
+    FLOOR("floor",true),
+    GRASSONE("grass1",true),
+    GRASSTWO("grass2",true),
+    HOUSE("house",false),
+    OPENDOOR("openDoor",true),
+    REMAINS("monsterRemains",true),
+    SIGN("sign",false),
+    STONEFLOOR("stoneFloor",true),
+    TREE("tree",false),
+    TREES("trees",false),
+    TREETRUNK("treeTrunk",false),
+    WALLDOWN("wallDown",false),
+    WALLLEFT("wallLeft",false),
+    WALLLEFTDOWNCORNER("wallLeftDownCorner",false),
+    WALLLEFTTOPCORNER("wallLeftTopCorner",false),
+    WALLUP("wallUp",false),
+    WATER("water",false);
 
     private final String tileName;
+    private final boolean stepable;
 
-    CellType(String tileName) {
+    CellType(String tileName, boolean stepable) {
         this.tileName = tileName;
+        this.stepable = stepable;
     }
 
     public String getTileName() {
         return tileName;
+    }
+
+    public boolean isStepable() {
+        return stepable;
     }
 }
