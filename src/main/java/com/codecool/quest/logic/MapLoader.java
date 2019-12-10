@@ -98,7 +98,7 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
-                            map.setSkeleton(skeleton);
+                            cell.setActor(skeleton);
                             skeletons.add(skeleton);
                             break;
                         case '@':
@@ -127,7 +127,7 @@ public class MapLoader {
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
-                            map.setOgre(new Ogre(cell));
+                            cell.setActor(new Ogre(cell));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

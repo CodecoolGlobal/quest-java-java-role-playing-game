@@ -3,10 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,10 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
