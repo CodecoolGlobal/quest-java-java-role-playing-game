@@ -21,5 +21,4 @@ public class Ogre extends Actor {
         cell.setType(CellType.REMAINS);
         new Key(cell);
     }
-
 }

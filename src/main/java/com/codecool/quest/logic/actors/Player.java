@@ -92,10 +92,8 @@ public class Player extends Actor implements Moveable {
             if (!isHealingItem(cell.getItem())) {
                 if (cell.getItem().getDefenseAmount() > 0) {
                     this.defense += cell.getItem().getDefenseAmount();
-                    inventory.add(cell.getItem());
-                } else {
-                    inventory.add(cell.getItem());
                 }
+                inventory.add(cell.getItem());
             } else if (isHealingItem(cell.getItem()) && this.health < 20) {
                 health = this.health + cell.getItem().getHealingAmount();
                 if (health > originalHealth) {
@@ -119,5 +117,4 @@ public class Player extends Actor implements Moveable {
     public List<Item> getInventory() {
         return inventory;
     }
-
 }

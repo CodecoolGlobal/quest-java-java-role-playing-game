@@ -54,9 +54,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         map.getPlayer().visionRadius();
         refresh();
-        scene.setOnKeyPressed(this::onKeyPressed);
 
         CompletableFuture.runAsync(this::aiMovement);
+        scene.setOnKeyPressed(this::onKeyPressed);
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
@@ -126,7 +126,14 @@ public class Main extends Application {
     private void aiMovement(){
         while(true) {
             for (Skeleton skeleton: MapLoader.skeletons) {
-                if (!skeleton.isDead())
+                if (!skeleton.isDead() && skeleton.isAggroStatus()) {
+                    int playerX = map.getPlayer().getX();
+                    int playerY = map.getPlayer().getY();
+                    int monsterX = skeleton.getX();
+                    int monsterY = skeleton.getY();
+                    skeleton.move(skeleton.calculateCoordinate(playerX, monsterX), skeleton.calculateCoordinate(playerY, monsterY));
+                } else if (!skeleton.isDead())
+                    skeleton.aggro();
                     skeleton.move(getRandomNumber(), getRandomNumber());
             }
             refresh();
