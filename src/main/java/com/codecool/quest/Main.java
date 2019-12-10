@@ -19,9 +19,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
@@ -60,6 +57,7 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
+        map.getPlayer().visionRadius();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -113,6 +111,9 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getEnvironment(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);
+                }
+                if (cell.getFog() != null) {
+                    Tiles.drawTile(context, cell.getFog(), x, y);
                 }
             }
         }
