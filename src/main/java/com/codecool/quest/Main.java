@@ -17,6 +17,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -30,7 +33,9 @@ public class Main extends Application {
     Label healthLabel = new Label();
     Label defenseLabel = new Label();
     ListView inventory = new ListView();
-
+    List<Item> savedInventory = new ArrayList<>();
+    int savedHealth;
+    int savedDefense;
 
     public static void main(String[] args) {
         launch(args);
@@ -111,11 +116,7 @@ public class Main extends Application {
                     Tiles.drawTile(context, cell.getFog(), x, y);
                 }
                 if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
-                    MapLoader.currentMap = "/map_2.txt";
-                    map = MapLoader.loadMap();
-                    map.getPlayer().visionRadius();
-                    refresh();
-                    labelRefresh();
+                    changeMap("/map_2.txt");
                 }
             }
         }
@@ -158,5 +159,18 @@ public class Main extends Application {
     private int getRandomNumber() {
         Random r = new Random();
         return r.nextInt(3) - 1;
+    }
+
+    private void changeMap(String newMap) {
+        MapLoader.currentMap = newMap;
+        savedInventory.addAll(map.getPlayer().getInventory());
+        savedHealth = map.getPlayer().getHealth();
+        savedDefense = map.getPlayer().getDefense();
+        map = MapLoader.loadMap();
+        map.getPlayer().getInventory().addAll(savedInventory);
+        map.getPlayer().setHealth(savedHealth);
+        map.getPlayer().setDefense(savedDefense);
+        refresh();
+        labelRefresh();
     }
 }
