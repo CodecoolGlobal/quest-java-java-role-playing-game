@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-public class Player extends Actor implements Moveable {
+public class Player extends Actor implements Aggro {
     private List<Item> inventory = new ArrayList<>();
 
     public Player(Cell cell) {
@@ -51,6 +51,7 @@ public class Player extends Actor implements Moveable {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
+        System.out.println("x: " + getX() + "y: " + getY());
         if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
             cell.setActor(null);
             nextCell.setActor(this);
@@ -72,23 +73,27 @@ public class Player extends Actor implements Moveable {
                     nextCell.getActor().setStolenItem(stolenItem);
                 }
             } else {
-                battle(nextCell.getActor());
+                attack(nextCell.getActor());
             }
         }
     }
 
-    private void battle(Actor enemy) {
+    @Override
+    void attack(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
-        if (enemy.health > 0) {
-            if (enemy.attack - this.defense > 0) {
-                this.health -= enemy.attack - this.defense;
-            }
-        } else {
+        if (enemy.health <= 0) {
             enemy.die(enemy.getCell());
         }
-        if (this.health <= 0) {
-            die(this.cell);
-        }
+    }
+
+    @Override
+    public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
+        return 0;
+    }
+
+    @Override
+    public void aggro() {
+
     }
 
     private void openDoor(Cell cell) {

@@ -42,8 +42,11 @@ public class Tiles {
         tileMap.put("water", new Tile(8,4));
         tileMap.put("wallDown", new Tile(19,2));
         tileMap.put("wallLeftDownCorner", new Tile(18,2));
+        tileMap.put("wallRightDownCorner", new Tile(20,2));
         tileMap.put("wallLeft", new Tile(18,1));
+        tileMap.put("wallRight", new Tile(20,1));
         tileMap.put("wallLeftTopCorner", new Tile(18,0));
+        tileMap.put("wallRightTopCorner", new Tile(20,0));
         tileMap.put("wallUp", new Tile(19,0));
         tileMap.put("stoneFloor", new Tile(19,1));
         tileMap.put("bonfire", new Tile(14,10));
@@ -51,6 +54,7 @@ public class Tiles {
         tileMap.put("house", new Tile(8,20));
         tileMap.put("boat", new Tile(9,19));
         tileMap.put("fog", new Tile(0,0));
+        tileMap.put("candleStand", new Tile(5,15));
         //Actors
         tileMap.put("player", new Tile(25, 0));
         tileMap.put("playerWithShield", new Tile(27, 0));
@@ -58,6 +62,7 @@ public class Tiles {
         tileMap.put("playerWithShieldAndHelm", new Tile(28,0));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("ogre", new Tile(30,6));
+        tileMap.put("gandalf", new Tile(24,1));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));

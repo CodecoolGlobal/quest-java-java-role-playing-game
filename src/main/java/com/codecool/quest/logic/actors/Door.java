@@ -18,4 +18,8 @@ public class Door extends Actor {
         cell.setActor(null);
         cell.setType(CellType.OPENDOOR);
     }
+
+    @Override
+    void attack(Actor enemy) {
+    }
 }

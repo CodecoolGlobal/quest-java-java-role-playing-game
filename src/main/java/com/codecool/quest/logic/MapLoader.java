@@ -11,9 +11,10 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static LinkedList<Skeleton> skeletons = new LinkedList<>();
+    public static String currentMap = "/map.txt";
 
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+        InputStream is = MapLoader.class.getResourceAsStream(currentMap);
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -27,7 +28,9 @@ public class MapLoader {
             for (int x = 0; x < width; x++) {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
-                    cell.setFog(new Fog(cell));
+                    if (currentMap.equals("/map.txt")) {
+                        cell.setFog(new Fog(cell));
+                    }
                     switch (line.charAt(x)) {
                         case ' ':
                             cell.setType(CellType.EMPTY);
@@ -68,6 +71,9 @@ public class MapLoader {
                         case 'M':
                             cell.setType(CellType.WALLUP);
                             break;
+                        case '[':
+                            cell.setType(CellType.WALLRIGHT);
+                            break;
                         case '$':
                             cell.setType(CellType.STONEFLOOR);
                             break;
@@ -86,8 +92,17 @@ public class MapLoader {
                         case 'v':
                             cell.setType(CellType.BOAT);
                             break;
+                        case 'Y':
+                            cell.setType(CellType.CANDLESTAND);
+                            break;
                         case 'n':
                             cell.setType(CellType.SIGN);
+                            break;
+                        case '`':
+                            cell.setType(CellType.WALLRIGHTTOPCORNER);
+                            break;
+                        case ';':
+                            cell.setType(CellType.WALLRIGHTDOWNCORNER);
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
@@ -96,7 +111,11 @@ public class MapLoader {
                             skeletons.add(skeleton);
                             break;
                         case '@':
-                            cell.setType(CellType.FLOOR);
+                            if(currentMap.equals("/map.txt")) {
+                                cell.setType(CellType.FLOOR);
+                            } else {
+                                cell.setType(CellType.STONEFLOOR);
+                            }
                             map.setPlayer(new Player(cell));
                             break;
                         case 'S':
@@ -130,6 +149,10 @@ public class MapLoader {
                         case 'r':
                             cell.setType(CellType.FLOOR);
                             new Tool(cell);
+                            break;
+                        case 'G':
+                            cell.setType(CellType.STONEFLOOR);
+                            cell.setActor(new Gandalf(cell));
                             break;
                         case 'ŧ':
                             cell.setType(CellType.FLOOR);

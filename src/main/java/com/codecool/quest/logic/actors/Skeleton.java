@@ -2,11 +2,10 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.items.Item;
 
 import java.util.Objects;
 
-public class Skeleton extends Actor implements Moveable, Aggro {
+public class Skeleton extends Actor implements Aggro {
     private boolean aggroStatus = false;
 
     public Skeleton(Cell cell) {
@@ -21,11 +20,23 @@ public class Skeleton extends Actor implements Moveable, Aggro {
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
+        if (nextCell.getActor() != null && nextCell.getActor().getTileName().contains("player")){
+            attack(nextCell.getActor());
+        } else if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
         }
+    }
+
+    @Override
+    void attack(Actor enemy) {
+        if (enemy.health > 0) {
+            enemy.health -= this.attack - enemy.defense;
+        } else {
+            enemy.die(enemy.cell);
+        }
+
     }
 
     @Override

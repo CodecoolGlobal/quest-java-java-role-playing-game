@@ -16,4 +16,11 @@ public class brokenBridge extends Actor{
     void die(Cell cell) {
         cell.setActor(null);
     }
+
+    @Override
+    void attack(Actor enemy) {
+
+    }
 }
+
+
