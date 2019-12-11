@@ -17,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -111,9 +110,15 @@ public class Main extends Application {
                 if (cell.getFog() != null) {
                     Tiles.drawTile(context, cell.getFog(), x, y);
                 }
+                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
+                    MapLoader.currentMap = "/map_2.txt";
+                    map = MapLoader.loadMap();
+                    map.getPlayer().visionRadius();
+                    refresh();
+                    labelRefresh();
+                }
             }
         }
-
     }
 
     private void labelRefresh() {
