@@ -6,6 +6,7 @@ public enum CellType {
     BONFIRE("bonfire", false),
     BRIDGE("bridge",true),
     BOAT("boat",false),
+    CANDLESTAND("candleStand",false),
     FLOOR("floor",true),
     GRASSONE("grass1",true),
     GRASSTWO("grass2",true),
@@ -20,8 +21,11 @@ public enum CellType {
     WALLDOWN("wallDown",false),
     WALLLEFT("wallLeft",false),
     WALLLEFTDOWNCORNER("wallLeftDownCorner",false),
+    WALLRIGHTDOWNCORNER("wallRightDownCorner",false),
     WALLLEFTTOPCORNER("wallLeftTopCorner",false),
+    WALLRIGHTTOPCORNER("wallRightTopCorner",false),
     WALLUP("wallUp",false),
+    WALLRIGHT("wallRight",false),
     WATER("water",false);
 
     private final String tileName;
