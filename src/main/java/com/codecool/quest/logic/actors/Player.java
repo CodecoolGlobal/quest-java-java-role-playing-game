@@ -3,8 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
-
-import javax.tools.Tool;
+import com.codecool.quest.logic.items.Tool;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
