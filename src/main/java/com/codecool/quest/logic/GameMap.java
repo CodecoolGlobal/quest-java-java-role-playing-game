@@ -36,16 +36,8 @@ public class GameMap {
         return player;
     }
 
-    public Skeleton getSkeleton() {
-        return skeleton;
-    }
-
     public void setSkeleton(Skeleton skeleton) {
         this.skeleton = skeleton;
-    }
-
-    public Ogre getOgre() {
-        return ogre;
     }
 
     public void setOgre(Ogre ogre) {
