@@ -95,8 +95,17 @@ public class MapLoader {
                         case 'v':
                             cell.setType(CellType.BOAT);
                             break;
+                        case 'Y':
+                            cell.setType(CellType.CANDLESTAND);
+                            break;
                         case 'n':
                             cell.setType(CellType.SIGN);
+                            break;
+                        case '`':
+                            cell.setType(CellType.WALLRIGHTTOPCORNER);
+                            break;
+                        case ';':
+                            cell.setType(CellType.WALLRIGHTDOWNCORNER);
                             break;
                         case 's':
                             cell.setType(CellType.FLOOR);
@@ -107,6 +116,8 @@ public class MapLoader {
                         case '@':
                             if(currentMap.equals("/map.txt")) {
                                 cell.setType(CellType.FLOOR);
+                            } else {
+                                cell.setType(CellType.STONEFLOOR);
                             }
                             map.setPlayer(new Player(cell));
                             break;
@@ -135,7 +146,7 @@ public class MapLoader {
                             map.setOgre(new Ogre(cell));
                             break;
                         case 'G':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.STONEFLOOR);
                             map.setGandalf(new Gandalf(cell));
                             break;
                         default:
