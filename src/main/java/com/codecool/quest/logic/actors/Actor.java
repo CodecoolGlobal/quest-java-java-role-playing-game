@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.items.Item;
 
 public abstract class Actor implements Drawable {
     Cell cell;
@@ -10,6 +11,7 @@ public abstract class Actor implements Drawable {
     int attack;
     int defense;
     boolean isDead = false;
+    Item stolenItem = null;
 
     Actor(Cell cell, int health, int attack, int defense) {
         this.cell = cell;
@@ -45,4 +47,11 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
+    public Item getStolenItem() {
+        return stolenItem;
+    }
+
+    public void setStolenItem(Item stolenItem) {
+        this.stolenItem = stolenItem;
+    }
 }

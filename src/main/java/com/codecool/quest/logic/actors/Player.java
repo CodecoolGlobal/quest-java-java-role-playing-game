@@ -4,10 +4,12 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Tool;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Actor implements Moveable {
     private List<Item> inventory = new ArrayList<>();
@@ -59,6 +61,16 @@ public class Player extends Actor implements Moveable {
                 openDoor(nextCell);
             } else if (nextCell.getActor().getTileName().equals("brokenBridge")) {
                 fixBridge(nextCell);
+            } else if (nextCell.getActor().getTileName().equals(("stealer"))) {
+                if (nextCell.getActor().getStolenItem() != null) {
+                    battle(nextCell.getActor());
+                } else {
+                    Random rnd = new Random();
+                    Item stolenItem;
+                    stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
+                    inventory.remove(stolenItem);
+                    nextCell.getActor().setStolenItem(stolenItem);
+                }
             } else {
                 battle(nextCell.getActor());
             }
