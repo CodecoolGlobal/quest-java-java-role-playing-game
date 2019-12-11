@@ -3,10 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -19,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import java.util.Objects;
+
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -111,9 +109,15 @@ public class Main extends Application {
                 if (cell.getFog() != null) {
                     Tiles.drawTile(context, cell.getFog(), x, y);
                 }
+                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
+                    MapLoader.currentMap = "/map_2.txt";
+                    map = MapLoader.loadMap();
+                    map.getPlayer().visionRadius();
+                    refresh();
+                    labelRefresh();
+                }
             }
         }
-
     }
 
     private void labelRefresh() {
@@ -126,9 +130,9 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement(){
-        while(true) {
-            for (Skeleton skeleton: MapLoader.skeletons) {
+    private void aiMovement() {
+        while (true) {
+            for (Skeleton skeleton : MapLoader.skeletons) {
                 if (!skeleton.isDead())
                     skeleton.move(getRandomNumber(), getRandomNumber());
             }

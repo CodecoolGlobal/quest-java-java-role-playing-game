@@ -1,9 +1,6 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Door;
-import com.codecool.quest.logic.actors.Ogre;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.environment.*;
 import com.codecool.quest.logic.items.Apple;
 import com.codecool.quest.logic.items.Helm;
@@ -17,9 +14,10 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static LinkedList<Skeleton> skeletons = new LinkedList<>();
+    public static String currentMap = "/map.txt";
 
     public static GameMap loadMap() {
-        InputStream is = MapLoader.class.getResourceAsStream("/map.txt");
+        InputStream is = MapLoader.class.getResourceAsStream(currentMap);
         Scanner scanner = new Scanner(is);
         int width = scanner.nextInt();
         int height = scanner.nextInt();
@@ -33,7 +31,9 @@ public class MapLoader {
             for (int x = 0; x < width; x++) {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
-                    cell.setFog(new Fog(cell));
+                    if (currentMap.equals("/map.txt")) {
+                        cell.setFog(new Fog(cell));
+                    }
                     switch (line.charAt(x)) {
                         case ' ':
                             cell.setType(CellType.EMPTY);
@@ -74,6 +74,9 @@ public class MapLoader {
                         case 'M':
                             cell.setType(CellType.WALLUP);
                             break;
+                        case '[':
+                            cell.setType(CellType.WALLRIGHT);
+                            break;
                         case '$':
                             cell.setType(CellType.STONEFLOOR);
                             break;
@@ -102,7 +105,9 @@ public class MapLoader {
                             skeletons.add(skeleton);
                             break;
                         case '@':
-                            cell.setType(CellType.FLOOR);
+                            if(currentMap.equals("/map.txt")) {
+                                cell.setType(CellType.FLOOR);
+                            }
                             map.setPlayer(new Player(cell));
                             break;
                         case 'S':
@@ -128,6 +133,10 @@ public class MapLoader {
                         case 'o':
                             cell.setType(CellType.FLOOR);
                             map.setOgre(new Ogre(cell));
+                            break;
+                        case 'G':
+                            cell.setType(CellType.FLOOR);
+                            map.setGandalf(new Gandalf(cell));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -22,6 +22,7 @@ public enum CellType {
     WALLLEFTDOWNCORNER("wallLeftDownCorner",false),
     WALLLEFTTOPCORNER("wallLeftTopCorner",false),
     WALLUP("wallUp",false),
+    WALLRIGHT("wallRight",false),
     WATER("water",false);
 
     private final String tileName;

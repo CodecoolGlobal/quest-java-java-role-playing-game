@@ -41,6 +41,7 @@ public class Tiles {
         tileMap.put("wallDown", new Tile(19,2));
         tileMap.put("wallLeftDownCorner", new Tile(18,2));
         tileMap.put("wallLeft", new Tile(18,1));
+        tileMap.put("wallRight", new Tile(20,1));
         tileMap.put("wallLeftTopCorner", new Tile(18,0));
         tileMap.put("wallUp", new Tile(19,0));
         tileMap.put("stoneFloor", new Tile(19,1));
@@ -56,6 +57,7 @@ public class Tiles {
         tileMap.put("playerWithShieldAndHelm", new Tile(28,0));
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("ogre", new Tile(30,6));
+        tileMap.put("gandalf", new Tile(24,1));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));
