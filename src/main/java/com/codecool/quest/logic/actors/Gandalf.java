@@ -23,4 +23,10 @@ public class Gandalf extends Actor implements Moveable {
     public String getTileName() {
         return "gandalf";
     }
+
+    @Override
+    void attack(Actor enemy) {
+
+    }
 }
+
