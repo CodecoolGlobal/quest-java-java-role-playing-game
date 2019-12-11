@@ -1,14 +1,8 @@
 package com.codecool.quest.logic;
 
-import com.codecool.quest.logic.actors.Door;
-import com.codecool.quest.logic.actors.Ogre;
-import com.codecool.quest.logic.actors.Player;
-import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.actors.*;
 import com.codecool.quest.logic.environment.*;
-import com.codecool.quest.logic.items.Apple;
-import com.codecool.quest.logic.items.Helm;
-import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Shield;
+import com.codecool.quest.logic.items.*;
 
 
 import java.io.InputStream;
@@ -98,7 +92,7 @@ public class MapLoader {
                         case 's':
                             cell.setType(CellType.FLOOR);
                             Skeleton skeleton = new Skeleton(cell);
-                            map.setSkeleton(skeleton);
+                            cell.setActor(skeleton);
                             skeletons.add(skeleton);
                             break;
                         case '@':
@@ -127,7 +121,15 @@ public class MapLoader {
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
-                            map.setOgre(new Ogre(cell));
+                            cell.setActor(new Ogre(cell));
+                            break;
+                        case 'B':
+                            cell.setType(CellType.BRIDGE);
+                            new brokenBridge(cell);
+                            break;
+                        case 'r':
+                            cell.setType(CellType.FLOOR);
+                            new Tool(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

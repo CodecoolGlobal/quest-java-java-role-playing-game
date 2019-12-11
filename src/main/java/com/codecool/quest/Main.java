@@ -3,10 +3,8 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
-import com.codecool.quest.logic.actors.Actor;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.items.Item;
-import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -31,6 +29,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label defenseLabel = new Label();
     ListView inventory = new ListView();
 
 
@@ -45,8 +44,9 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(healthLabel, 0, 0);
-        ui.add(new Label("Inventory"), 0, 1);
-        ui.add(inventory, 0, 2);
+        ui.add(defenseLabel, 0,1);
+        ui.add(new Label("Inventory"), 0, 2);
+        ui.add(inventory, 0, 3);
 
         BorderPane borderPane = new BorderPane();
 
@@ -118,6 +118,7 @@ public class Main extends Application {
 
     private void labelRefresh() {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
+        defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
         inventory.getItems().clear();
         for (Item item : map.getPlayer().getInventory()) {
             if (!inventory.getItems().contains(item.getTileName())) {
@@ -129,8 +130,16 @@ public class Main extends Application {
     private void aiMovement(){
         while(true) {
             for (Skeleton skeleton: MapLoader.skeletons) {
-                if (!skeleton.isDead())
+                if (!skeleton.isDead() && skeleton.isAggroStatus()) {
+                    int playerX = map.getPlayer().getX();
+                    int playerY = map.getPlayer().getY();
+                    int monsterX = skeleton.getX();
+                    int monsterY = skeleton.getY();
+                    skeleton.move(skeleton.calculateCoordinate(playerX, monsterX), skeleton.calculateCoordinate(playerY, monsterY));
+                } else if (!skeleton.isDead()) {
+                    skeleton.aggro();
                     skeleton.move(getRandomNumber(), getRandomNumber());
+                }
             }
             refresh();
             try {

@@ -3,7 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
-
+import com.codecool.quest.logic.items.Tool;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,6 +57,8 @@ public class Player extends Actor implements Moveable {
         } else if (!Objects.isNull(nextCell.getActor())) {
             if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);
+            } else if (nextCell.getActor().getTileName().equals("brokenBridge")) {
+                fixBridge(nextCell);
             } else {
                 battle(nextCell.getActor());
             }
@@ -66,7 +68,7 @@ public class Player extends Actor implements Moveable {
     private void battle(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
         if (enemy.health > 0) {
-            if(enemy.attack - this.defense > 0) {
+            if (enemy.attack - this.defense > 0) {
                 this.health -= enemy.attack - this.defense;
             }
         } else {
@@ -87,15 +89,23 @@ public class Player extends Actor implements Moveable {
         }
     }
 
+    private void fixBridge(Cell cell) {
+        for (Item item : inventory) {
+            if (item instanceof Tool) {
+                cell.getActor().die(cell);
+                inventory.remove(item);
+                break;
+            }
+        }
+    }
+
     public void pickUp() {
         if (cell.getItem() != null) {
             if (!isHealingItem(cell.getItem())) {
                 if (cell.getItem().getDefenseAmount() > 0) {
                     this.defense += cell.getItem().getDefenseAmount();
-                    inventory.add(cell.getItem());
-                } else {
-                    inventory.add(cell.getItem());
                 }
+                inventory.add(cell.getItem());
             } else if (isHealingItem(cell.getItem()) && this.health < 20) {
                 health = this.health + cell.getItem().getHealingAmount();
                 if (health > originalHealth) {
@@ -119,5 +129,4 @@ public class Player extends Actor implements Moveable {
     public List<Item> getInventory() {
         return inventory;
     }
-
 }
