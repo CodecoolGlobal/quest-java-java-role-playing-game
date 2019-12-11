@@ -32,7 +32,9 @@ public class Skeleton extends Actor implements Aggro {
     @Override
     void attack(Actor enemy) {
         if (enemy.health > 0) {
-            enemy.health -= this.attack - enemy.defense;
+            if(this.attack - enemy.defense > 0) {
+                enemy.health -= this.attack - enemy.defense;
+            }
         } else {
             enemy.die(enemy.cell);
         }

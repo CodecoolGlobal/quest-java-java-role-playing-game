@@ -64,7 +64,7 @@ public class Player extends Actor implements Aggro {
                 fixBridge(nextCell);
             } else if (nextCell.getActor().getTileName().equals(("stealer"))) {
                 if (nextCell.getActor().getStolenItem() != null) {
-                    battle(nextCell.getActor());
+                    attack(nextCell.getActor());
                 } else {
                     Random rnd = new Random();
                     Item stolenItem;
@@ -80,9 +80,12 @@ public class Player extends Actor implements Aggro {
 
     @Override
     void attack(Actor enemy) {
-        enemy.health -= this.attack - enemy.defense;
-        if (enemy.health <= 0) {
-            enemy.die(enemy.getCell());
+        if (enemy.health > 0) {
+            if(this.attack - enemy.defense > 0) {
+                enemy.health -= this.attack - enemy.defense;
+            }
+        } else {
+            enemy.die(enemy.cell);
         }
     }
 

@@ -13,6 +13,7 @@ public abstract class Actor implements Drawable {
     boolean isDead = false;
     Item stolenItem = null;
 
+
     Actor(Cell cell, int health, int attack, int defense) {
         this.cell = cell;
         this.health = health;

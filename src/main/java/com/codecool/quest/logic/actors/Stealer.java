@@ -6,7 +6,18 @@ import com.codecool.quest.logic.items.Item;
 
 public class Stealer extends Actor implements Aggro{
 
-    public Stealer(Cell cell){super(cell, 20, 0, 0); }
+    public Stealer(Cell cell){super(cell, 20, 2, 0); }
+
+    @Override
+    void attack(Actor enemy) {
+        if (enemy.health > 0) {
+            if(this.attack - enemy.defense > 0) {
+                enemy.health -= this.attack - enemy.defense;
+            }
+        } else {
+            enemy.die(enemy.cell);
+        }
+    }
 
     @Override
     void die(Cell cell) {
@@ -38,6 +49,11 @@ public class Stealer extends Actor implements Aggro{
             }
         }
     }*/
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+
     }
 
 
