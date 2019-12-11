@@ -51,7 +51,7 @@ public class Player extends Actor implements Aggro {
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         System.out.println("x: " + getX() + "y: " + getY());
-        if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
+        if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isSteppable()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;

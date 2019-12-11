@@ -158,6 +158,8 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         }
+        System.out.println("kilép");
+        gandalfMovement();
     }
 
     private int getRandomNumber() {
@@ -176,5 +178,21 @@ public class Main extends Application {
         map.getPlayer().setDefense(savedDefense);
         refresh();
         labelRefresh();
+    }
+
+    private void gandalfMovement() {
+        int dx = 1;
+        while (!MapLoader.gandalf.isDead()) {
+            if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
+                dx = -dx;
+            }
+            MapLoader.gandalf.move(dx, 0);
+            refresh();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

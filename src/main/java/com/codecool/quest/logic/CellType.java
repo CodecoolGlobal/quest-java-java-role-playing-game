@@ -40,7 +40,7 @@ public enum CellType {
         return tileName;
     }
 
-    public boolean isStepable() {
+    public boolean isSteppable() {
         return stepable;
     }
 }

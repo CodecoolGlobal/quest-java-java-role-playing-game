@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class MapLoader {
     public static LinkedList<Skeleton> skeletons = new LinkedList<>();
     public static Ogre ogre;
+    public static Gandalf gandalf;
     public static String currentMap = "/map.txt";
 
     public static GameMap loadMap() {
@@ -155,7 +156,9 @@ public class MapLoader {
                             break;
                         case 'G':
                             cell.setType(CellType.STONEFLOOR);
-                            cell.setActor(new Gandalf(cell));
+                            Gandalf mage = new Gandalf(cell);
+                            cell.setActor(mage);
+                            gandalf = mage;
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
