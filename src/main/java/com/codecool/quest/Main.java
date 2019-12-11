@@ -115,7 +115,7 @@ public class Main extends Application {
                 if (cell.getFog() != null) {
                     Tiles.drawTile(context, cell.getFog(), x, y);
                 }
-                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
+                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 22 && map.getPlayer().getY() == 16) { // x: 22, y: 16
                     changeMap("/map_2.txt");
                 }
             }
@@ -134,11 +134,11 @@ public class Main extends Application {
     }
 
     private void aiMovement(){
-        while(true) {
+        while(MapLoader.currentMap.equals("/map.txt")) {
+            int playerX = map.getPlayer().getX();
+            int playerY = map.getPlayer().getY();
             for (Skeleton skeleton: MapLoader.skeletons) {
                 if (!skeleton.isDead() && skeleton.isAggroStatus()) {
-                    int playerX = map.getPlayer().getX();
-                    int playerY = map.getPlayer().getY();
                     int monsterX = skeleton.getX();
                     int monsterY = skeleton.getY();
                     skeleton.move(skeleton.calculateCoordinate(playerX, monsterX), skeleton.calculateCoordinate(playerY, monsterY));
@@ -147,6 +147,10 @@ public class Main extends Application {
                     skeleton.move(getRandomNumber(), getRandomNumber());
                 }
             }
+            int ogreX = MapLoader.ogre.getX();
+            int ogreY = MapLoader.ogre.getY();
+            MapLoader.ogre.move(MapLoader.ogre.calculateCoordinate(playerX, ogreX), MapLoader.ogre.calculateCoordinate(playerY, ogreY));
+
             refresh();
             try {
                 Thread.sleep(600);

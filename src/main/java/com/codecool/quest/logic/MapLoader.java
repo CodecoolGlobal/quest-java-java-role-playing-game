@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class MapLoader {
     public static LinkedList<Skeleton> skeletons = new LinkedList<>();
+    public static Ogre ogre;
     public static String currentMap = "/map.txt";
 
     public static GameMap loadMap() {
@@ -140,7 +141,9 @@ public class MapLoader {
                             break;
                         case 'o':
                             cell.setType(CellType.FLOOR);
-                            cell.setActor(new Ogre(cell));
+                            Ogre keyKeeper = new Ogre(cell);
+                            cell.setActor(keyKeeper);
+                            ogre = keyKeeper;
                             break;
                         case 'B':
                             cell.setType(CellType.BRIDGE);
