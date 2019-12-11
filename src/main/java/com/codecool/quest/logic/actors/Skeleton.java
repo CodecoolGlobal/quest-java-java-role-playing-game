@@ -2,11 +2,10 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
-import com.codecool.quest.logic.items.Item;
 
 import java.util.Objects;
 
-public class Skeleton extends Actor implements Moveable, Aggro {
+public class Skeleton extends Actor implements Aggro {
     private boolean aggroStatus = false;
 
     public Skeleton(Cell cell) {

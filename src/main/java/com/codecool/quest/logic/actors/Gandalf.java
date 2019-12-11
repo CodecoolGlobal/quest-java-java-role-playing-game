@@ -2,17 +2,11 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 
-public class Gandalf extends Actor implements Moveable {
+public class Gandalf extends Actor implements Aggro {
 
     public Gandalf(Cell cell) {
         super(cell, 50, 10, 10);
     }
-
-    @Override
-    public void move(int dx, int dy) {
-
-    }
-
 
     @Override
     void die(Cell cell) {
@@ -26,6 +20,21 @@ public class Gandalf extends Actor implements Moveable {
 
     @Override
     void attack(Actor enemy) {
+
+    }
+
+    @Override
+    public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
+        return 0;
+    }
+
+    @Override
+    public void aggro() {
+
+    }
+
+    @Override
+    public void move(int dx, int dy) {
 
     }
 }

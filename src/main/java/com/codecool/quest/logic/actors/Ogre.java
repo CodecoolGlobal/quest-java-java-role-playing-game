@@ -4,7 +4,7 @@ import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
 import com.codecool.quest.logic.items.Key;
 
-public class Ogre extends Actor {
+public class Ogre extends Actor implements Aggro {
     public Ogre(Cell cell) {
         super(cell, 20, 7, 0);
     }
@@ -24,5 +24,20 @@ public class Ogre extends Actor {
 
     @Override
     void attack(Actor enemy) {
+    }
+
+    @Override
+    public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
+        return 0;
+    }
+
+    @Override
+    public void aggro() {
+
+    }
+
+    @Override
+    public void move(int dx, int dy) {
+
     }
 }

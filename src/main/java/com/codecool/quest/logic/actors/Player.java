@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Player extends Actor implements Moveable {
+public class Player extends Actor implements Aggro {
     private List<Item> inventory = new ArrayList<>();
 
     public Player(Cell cell) {
@@ -72,6 +72,16 @@ public class Player extends Actor implements Moveable {
         if (enemy.health <= 0) {
             enemy.die(enemy.getCell());
         }
+    }
+
+    @Override
+    public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
+        return 0;
+    }
+
+    @Override
+    public void aggro() {
+
     }
 
     private void openDoor(Cell cell) {
