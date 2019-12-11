@@ -17,6 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -28,6 +29,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label defenseLabel = new Label();
     ListView inventory = new ListView();
 
 
@@ -42,8 +44,9 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(healthLabel, 0, 0);
-        ui.add(new Label("Inventory"), 0, 1);
-        ui.add(inventory, 0, 2);
+        ui.add(defenseLabel, 0,1);
+        ui.add(new Label("Inventory"), 0, 2);
+        ui.add(inventory, 0, 3);
 
         BorderPane borderPane = new BorderPane();
 
@@ -54,9 +57,9 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         map.getPlayer().visionRadius();
         refresh();
+        scene.setOnKeyPressed(this::onKeyPressed);
 
         CompletableFuture.runAsync(this::aiMovement);
-        scene.setOnKeyPressed(this::onKeyPressed);
 
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
@@ -115,6 +118,7 @@ public class Main extends Application {
 
     private void labelRefresh() {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
+        defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
         inventory.getItems().clear();
         for (Item item : map.getPlayer().getInventory()) {
             if (!inventory.getItems().contains(item.getTileName())) {
