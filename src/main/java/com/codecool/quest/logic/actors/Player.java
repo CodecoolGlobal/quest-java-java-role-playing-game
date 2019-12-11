@@ -3,7 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
-import com.codecool.quest.logic.items.Tool;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,22 +60,16 @@ public class Player extends Actor implements Moveable {
             } else if (nextCell.getActor().getTileName().equals("brokenBridge")) {
                 fixBridge(nextCell);
             } else {
-                battle(nextCell.getActor());
+                attack(nextCell.getActor());
             }
         }
     }
 
-    private void battle(Actor enemy) {
+    @Override
+    void attack(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
-        if (enemy.health > 0) {
-            if (enemy.attack - this.defense > 0) {
-                this.health -= enemy.attack - this.defense;
-            }
-        } else {
+        if (enemy.health <= 0) {
             enemy.die(enemy.getCell());
-        }
-        if (this.health <= 0) {
-            die(this.cell);
         }
     }
 

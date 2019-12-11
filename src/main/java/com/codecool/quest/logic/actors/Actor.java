@@ -19,6 +19,8 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
+    abstract void attack(Actor enemy);
+
     abstract void die(Cell cell);
 
     public int getHealth() {
