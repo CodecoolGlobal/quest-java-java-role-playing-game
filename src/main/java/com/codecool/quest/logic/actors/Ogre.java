@@ -21,4 +21,8 @@ public class Ogre extends Actor {
         cell.setType(CellType.REMAINS);
         new Key(cell);
     }
+
+    @Override
+    void attack(Actor enemy) {
+    }
 }

@@ -58,22 +58,16 @@ public class Player extends Actor implements Moveable {
             if (nextCell.getActor().getTileName().equals("closedDoor")) {
                 openDoor(nextCell);
             } else {
-                battle(nextCell.getActor());
+                attack(nextCell.getActor());
             }
         }
     }
 
-    private void battle(Actor enemy) {
+    @Override
+    void attack(Actor enemy) {
         enemy.health -= this.attack - enemy.defense;
-        if (enemy.health > 0) {
-            if(enemy.attack - this.defense > 0) {
-                this.health -= enemy.attack - this.defense;
-            }
-        } else {
+        if (enemy.health <= 0) {
             enemy.die(enemy.getCell());
-        }
-        if (this.health <= 0) {
-            die(this.cell);
         }
     }
 
