@@ -132,9 +132,10 @@ public class Main extends Application {
                     int monsterX = skeleton.getX();
                     int monsterY = skeleton.getY();
                     skeleton.move(skeleton.calculateCoordinate(playerX, monsterX), skeleton.calculateCoordinate(playerY, monsterY));
-                } else if (!skeleton.isDead())
+                } else if (!skeleton.isDead()) {
                     skeleton.aggro();
                     skeleton.move(getRandomNumber(), getRandomNumber());
+                }
             }
             refresh();
             try {
