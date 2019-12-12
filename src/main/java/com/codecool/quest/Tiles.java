@@ -89,6 +89,7 @@ public class Tiles {
         tileMap.put("r", new Tile(23, 31));
         tileMap.put("a", new Tile(19, 30));
         tileMap.put("f", new Tile(24, 30));
+        tileMap.put("y", new Tile(30, 31));
         tileMap.put("!", new Tile(19, 25));
     }
 

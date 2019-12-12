@@ -173,7 +173,10 @@ public class Main extends Application {
     }
 
     private void changeMap(String newMap) {
-        if (!MapLoader.currentMap.equals("/welcome.txt")) {
+        if (MapLoader.currentMap.equals("/welcome.txt")) {
+            savedHealth = 20;
+            savedDefense = 0;
+        } else {
             savedInventory.addAll(map.getPlayer().getInventory());
             savedHealth = map.getPlayer().getHealth();
             savedDefense = map.getPlayer().getDefense();

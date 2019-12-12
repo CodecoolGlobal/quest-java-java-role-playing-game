@@ -106,6 +106,11 @@ public class MapLoader {
                                 cell.setType(CellType.M);
                             }
                             break;
+                        case 'y':
+                            if(currentMap.equals("/death.txt")) {
+                                cell.setType(CellType.Y);
+                            }
+                            break;
                         case '[':
                             cell.setType(CellType.WALLRIGHT);
                             break;

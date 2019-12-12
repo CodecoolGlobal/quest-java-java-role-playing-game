@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Tool;
@@ -43,9 +44,7 @@ public class Player extends Actor implements Aggro {
     }
 
     @Override
-    public void die(Cell cell) {
-        System.out.println("Game over mf");
-    }
+    public void die(Cell cell) { }
 
     @Override
     public void move(int dx, int dy) {
