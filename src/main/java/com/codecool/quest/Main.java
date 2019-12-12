@@ -151,10 +151,14 @@ public class Main extends Application {
                     skeleton.move(getRandomNumber(), getRandomNumber());
                 }
             }
+            //ogre movement
             int ogreX = MapLoader.ogre.getX();
             int ogreY = MapLoader.ogre.getY();
             MapLoader.ogre.move(MapLoader.ogre.calculateCoordinate(playerX, ogreX), MapLoader.ogre.calculateCoordinate(playerY, ogreY));
 
+            int stealerX = MapLoader.stealer.getX();
+            int stealerY = MapLoader.stealer.getY();
+            MapLoader.stealer.move(MapLoader.stealer.calculateCoordinate(playerX, stealerX), MapLoader.stealer.calculateCoordinate(playerY, stealerY));
             refresh();
             try {
                 Thread.sleep(600);
