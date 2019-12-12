@@ -65,8 +65,6 @@ public class Main extends Application {
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
-        CompletableFuture.runAsync(this::aiMovement);
-
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
     }
@@ -143,7 +141,7 @@ public class Main extends Application {
         while(MapLoader.currentMap.equals("/map.txt")) {
             int playerX = map.getPlayer().getX();
             int playerY = map.getPlayer().getY();
-            for (Skeleton skeleton: MapLoader.skeletons) {
+            for (Skeleton skeleton : MapLoader.skeletons) {
                 if (!skeleton.isDead() && skeleton.isAggroStatus()) {
                     int monsterX = skeleton.getX();
                     int monsterY = skeleton.getY();
@@ -180,14 +178,16 @@ public class Main extends Application {
         }
         MapLoader.currentMap = newMap;
         map = MapLoader.loadMap();
-        if (MapLoader.currentMap.equals("/map.txt")) {
-            map.getPlayer().visionRadius();
-        }
+
         map.getPlayer().getInventory().addAll(savedInventory);
         map.getPlayer().setHealth(savedHealth);
         map.getPlayer().setDefense(savedDefense);
         refresh();
         labelRefresh();
+        if (MapLoader.currentMap.equals("/map.txt")) {
+            map.getPlayer().visionRadius();
+            CompletableFuture.runAsync(this::aiMovement);
+        }
     }
 
     private void gandalfMovement() {

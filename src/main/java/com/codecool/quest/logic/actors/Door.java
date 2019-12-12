@@ -14,12 +14,12 @@ public class Door extends Actor {
     }
 
     @Override
-    void die(Cell cell) {
+    protected void die(Cell cell) {
         cell.setActor(null);
         cell.setType(CellType.OPENDOOR);
     }
 
     @Override
-    void attack(Actor enemy) {
+    protected void attack(Actor enemy) {
     }
 }

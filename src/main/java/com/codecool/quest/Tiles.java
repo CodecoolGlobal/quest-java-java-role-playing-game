@@ -73,6 +73,8 @@ public class Tiles {
         tileMap.put("key", new Tile(16,23));
         tileMap.put("apple", new Tile(15,29));
         tileMap.put("helm", new Tile(4, 22));
+        //Spells
+        tileMap.put("fireball", new Tile(15, 10));
         tileMap.put("stealer", new Tile(26, 9));
         //Letters
         tileMap.put("w", new Tile(28, 31));
