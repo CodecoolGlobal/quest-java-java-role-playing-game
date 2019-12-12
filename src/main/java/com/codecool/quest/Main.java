@@ -218,7 +218,7 @@ public class Main extends Application {
             if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
                 dx = -dx;
             }
-            if (counter == 10) {
+            if (counter == 5) {
                 Gandalf gandalf = MapLoader.gandalf;
                 Fireball ball = new Fireball(MapLoader.gandalf.getCell().getNeighbor(0, 1));
                 while (!ball.isDead()) {
