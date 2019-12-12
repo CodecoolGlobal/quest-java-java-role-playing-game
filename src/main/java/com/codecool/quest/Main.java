@@ -59,7 +59,9 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        map.getPlayer().visionRadius();
+        if (!MapLoader.currentMap.equals("/welcome.txt")) {
+            map.getPlayer().visionRadius();
+        }
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -92,9 +94,13 @@ public class Main extends Application {
                 labelRefresh();
                 break;
             case F:
-                map.getPlayer().pickUp();
-                refresh();
-                labelRefresh();
+                if (MapLoader.currentMap.equals("/welcome.txt")){
+                    changeMap("/map.txt");
+                } else {
+                    map.getPlayer().pickUp();
+                    refresh();
+                    labelRefresh();
+                }
                 break;
         }
     }
@@ -162,11 +168,16 @@ public class Main extends Application {
     }
 
     private void changeMap(String newMap) {
+        if (!MapLoader.currentMap.equals("/welcome.txt")) {
+            savedInventory.addAll(map.getPlayer().getInventory());
+            savedHealth = map.getPlayer().getHealth();
+            savedDefense = map.getPlayer().getDefense();
+        }
         MapLoader.currentMap = newMap;
-        savedInventory.addAll(map.getPlayer().getInventory());
-        savedHealth = map.getPlayer().getHealth();
-        savedDefense = map.getPlayer().getDefense();
         map = MapLoader.loadMap();
+        if (MapLoader.currentMap.equals("/map.txt")) {
+            map.getPlayer().visionRadius();
+        }
         map.getPlayer().getInventory().addAll(savedInventory);
         map.getPlayer().setHealth(savedHealth);
         map.getPlayer().setDefense(savedDefense);
