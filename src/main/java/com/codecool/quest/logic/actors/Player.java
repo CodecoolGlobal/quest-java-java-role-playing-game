@@ -9,6 +9,7 @@ import com.codecool.quest.logic.items.Tool;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Player extends Actor implements Aggro {
@@ -44,7 +45,10 @@ public class Player extends Actor implements Aggro {
     }
 
     @Override
-    public void die(Cell cell) { }
+    public void die(Cell cell) {
+        MapLoader.currentMap = "/death.txt";
+        MapLoader.loadMap();
+    }
 
     @Override
     public void move(int dx, int dy) {
