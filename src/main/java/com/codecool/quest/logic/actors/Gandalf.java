@@ -13,14 +13,18 @@ public class Gandalf extends Actor implements Aggro {
         super(cell, 50, 10, 10);
     }
 
-    public void fireWall(GameMap map){
+    public void fireWall(GameMap map) {
 
-        for(int i=0; i<map.getWidth(); i++){
+        Fireball[] fireWall = new Fireball[map.getWidth()];
+        for (int i = 0; i < map.getWidth(); i++) {
             Cell cell = map.getCell(i, 0);
             Fireball ball = new Fireball(cell);
             cell.setActor(ball);
-            for(int j=0; j<map.getHeight();j++) {
-                ball.move(0, 1);
+            fireWall[i] = ball;
+        }
+        for (int j = 0; j < map.getHeight(); j++) {
+            for (Fireball f : fireWall) {
+                f.move(0, 1);
             }
         }
     }
@@ -32,8 +36,14 @@ public class Gandalf extends Actor implements Aggro {
 
     @Override
     public String getTileName() {
-        return "gandalf";
+        if (this.getHealth() > 10) {
+            return "gandalf";
+        } else {
+            this.setAttack(15);
+            return "dyingGandalf";
+        }
     }
+
 
     @Override
     protected void attack(Actor enemy) {

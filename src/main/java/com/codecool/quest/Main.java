@@ -50,7 +50,7 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(healthLabel, 0, 0);
-        ui.add(defenseLabel, 0,1);
+        ui.add(defenseLabel, 0, 1);
         ui.add(new Label("Inventory"), 0, 2);
         ui.add(inventory, 0, 3);
 
@@ -143,8 +143,8 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement(){
-        while(MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
+    private void aiMovement() {
+        while (MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
             int playerX = map.getPlayer().getX();
             int playerY = map.getPlayer().getY();
             for (Skeleton skeleton : MapLoader.skeletons) {
@@ -222,16 +222,41 @@ public class Main extends Application {
                         e.printStackTrace();
                     }
                 }
+            }
+            if (counter == 10) {
+
+                ArrayList<Fireball> fireWall = new ArrayList<Fireball>();
+
+                for (int i = 0; i < map.getWidth(); i++) {
+                    Cell cell = map.getCell(i, 0);
+                    Fireball ball = new Fireball(cell);
+                    cell.setActor(ball);
+                    fireWall.add(ball);
+                }
+
+                for (int i = 0; i < map.getHeight(); i++) {
+                    for (Fireball k : fireWall) {
+                        k.move(0, 1);
+                    }
+                    refresh();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
                 counter = 0;
+
             }
-            MapLoader.gandalf.move(dx, 0);
-            refresh();
-            try {
-                Thread.sleep(600);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            ++counter;
+
+        MapLoader.gandalf.move(dx, 0);
+        refresh();
+        try {
+            Thread.sleep(600);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        ++counter;
+    }
     }
 }

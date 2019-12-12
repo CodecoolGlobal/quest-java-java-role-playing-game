@@ -69,6 +69,7 @@ public class Tiles {
         tileMap.put("skeleton", new Tile(29, 6));
         tileMap.put("ogre", new Tile(30,6));
         tileMap.put("gandalf", new Tile(24,1));
+        tileMap.put("dyingGandalf", new Tile(31,5));
         //Items
         tileMap.put("shield", new Tile(5, 26));
         tileMap.put("key", new Tile(16,23));
