@@ -159,6 +159,7 @@ public class Main extends Application {
             int stealerX = MapLoader.stealer.getX();
             int stealerY = MapLoader.stealer.getY();
             MapLoader.stealer.move(MapLoader.stealer.calculateCoordinate(playerX, stealerX), MapLoader.stealer.calculateCoordinate(playerY, stealerY));
+
             refresh();
             try {
                 Thread.sleep(600);

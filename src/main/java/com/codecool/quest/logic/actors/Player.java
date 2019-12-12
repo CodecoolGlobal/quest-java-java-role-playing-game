@@ -70,7 +70,7 @@ public class Player extends Actor implements Aggro {
                     Item stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
                     inventory.remove(stolenItem);
                     nextCell.getActor().setStolenItem(stolenItem);
-                    int i = rnd.nextInt(13) + 9;
+                    int i = rnd.nextInt(13) + 7;
                     int j = rnd.nextInt((14))-4;
                     Cell c = nextCell.getNeighbor(-i,j);
                     nextCell.getActor().setCell(c);
