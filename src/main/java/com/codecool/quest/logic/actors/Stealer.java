@@ -2,32 +2,11 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.CellType;
+import com.codecool.quest.logic.items.Item;
 
-import java.util.Objects;
+public class Stealer extends Actor implements Aggro{
 
-public class Skeleton extends Actor implements Aggro {
-    private boolean aggroStatus = false;
-
-    public Skeleton(Cell cell) {
-        super(cell, 10, 2, 0);
-    }
-
-    @Override
-    public String getTileName() {
-        return "skeleton";
-    }
-
-    @Override
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
-        if (nextCell.getActor() != null && nextCell.getActor().getTileName().contains("player")){
-            attack(nextCell.getActor());
-        } else if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isSteppable()) {
-            cell.setActor(null);
-            nextCell.setActor(this);
-            cell = nextCell;
-        }
-    }
+    public Stealer(Cell cell){super(cell, 20, 2, 0); }
 
     @Override
     protected void attack(Actor enemy) {
@@ -38,14 +17,19 @@ public class Skeleton extends Actor implements Aggro {
         } else {
             enemy.die(enemy.cell);
         }
-
     }
 
     @Override
-    public void die(Cell cell) {
+    protected void die(Cell cell) {
         cell.setActor(null);
         this.isDead = true;
         cell.setType(CellType.REMAINS);
+        cell.setItem(this.stolenItem);
+    }
+
+    @Override
+    public String getTileName() {
+        return "stealer";
     }
 
     @Override
@@ -55,7 +39,7 @@ public class Skeleton extends Actor implements Aggro {
 
     @Override
     public void aggro() {
-        for (int i = -1; i < 2; i++) {
+        /*for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
                 Cell neighbour = cell.getNeighbor(i, j);
                 if (!Objects.isNull(neighbour.getActor()) &&
@@ -64,9 +48,19 @@ public class Skeleton extends Actor implements Aggro {
                 }
             }
         }
+    }*/
     }
 
-    public boolean isAggroStatus() {
-        return aggroStatus;
+    @Override
+    public void move(int dx, int dy) {
+
     }
+
+
+    public boolean isAggroStatus() {
+        return false;
+    }
+
+
+
 }

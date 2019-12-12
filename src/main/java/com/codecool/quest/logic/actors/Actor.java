@@ -2,16 +2,19 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.GameMap;
+import com.codecool.quest.logic.items.Item;
 
 public abstract class Actor implements Drawable {
-    Cell cell;
-    int health;
-    final int originalHealth = 20;
-    int attack;
-    int defense;
-    boolean isDead = false;
+    Item stolenItem = null;
+    protected Cell cell;
+    protected int health;
+    protected final int originalHealth = 20;
+    protected int attack;
+    protected int defense;
+    protected boolean isDead = false;
 
-    Actor(Cell cell, int health, int attack, int defense) {
+    protected Actor(Cell cell, int health, int attack, int defense) {
         this.cell = cell;
         this.health = health;
         this.attack = attack;
@@ -19,9 +22,9 @@ public abstract class Actor implements Drawable {
         this.cell.setActor(this);
     }
 
-    abstract void attack(Actor enemy);
+    protected abstract void attack(Actor enemy);
 
-    abstract void die(Cell cell);
+    protected abstract void die(Cell cell);
 
     public int getHealth() {
         return health;
@@ -47,6 +50,8 @@ public abstract class Actor implements Drawable {
         return cell;
     }
 
+    public void setCell(Cell cell){this.cell = cell;}
+
     public int getX() {
         return cell.getX();
     }
@@ -55,4 +60,11 @@ public abstract class Actor implements Drawable {
         return cell.getY();
     }
 
+    public Item getStolenItem() {
+        return stolenItem;
+    }
+
+    public void setStolenItem(Item stolenItem) {
+        this.stolenItem = stolenItem;
+    }
 }

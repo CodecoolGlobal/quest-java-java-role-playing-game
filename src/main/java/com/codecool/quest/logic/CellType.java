@@ -18,6 +18,7 @@ public enum CellType {
     A("a", true),
     F("f", true),
     Y("y", true),
+    I("i", true),
     EXCLAMATION("!", true),
 
     //Environment

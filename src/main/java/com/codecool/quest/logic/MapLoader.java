@@ -31,7 +31,7 @@ public class MapLoader {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
                     if (currentMap.equals("/map.txt")) {
-                        cell.setFog(new Fog(cell));
+                        //cell.setFog(new Fog(cell));
                     }
                     switch (line.charAt(x)) {
                         case ' ':
@@ -47,7 +47,11 @@ public class MapLoader {
                             cell.setType(CellType.GRASSONE);
                             break;
                         case 'i':
-                            cell.setType(CellType.GRASSTWO);
+                            if (currentMap.equals("/death.txt")) {
+                                cell.setType(CellType.I);
+                            } else {
+                                cell.setType(CellType.GRASSTWO);
+                            }
                             break;
                         case 'T':
                             cell.setType(CellType.TREES);
@@ -71,7 +75,7 @@ public class MapLoader {
                             }
                             break;
                         case 'e':
-                            if(currentMap.equals("/welcome.txt")) {
+                            if(currentMap.equals("/welcome.txt") || currentMap.equals("/death.txt")) {
                                 cell.setType(CellType.E);
                             }
                             break;
@@ -81,7 +85,7 @@ public class MapLoader {
                             }
                             break;
                         case '!':
-                            if(currentMap.equals("/welcome.txt")) {
+                            if(currentMap.equals("/welcome.txt") || currentMap.equals("/death.txt")) {
                                 cell.setType(CellType.EXCLAMATION);
                             }
                             break;
@@ -190,7 +194,7 @@ public class MapLoader {
                             new Door(cell);
                             break;
                         case 'd':
-                            if(currentMap.equals("/welcome.txt")) {
+                            if(currentMap.equals("/welcome.txt") || currentMap.equals("/death.txt")) {
                                 cell.setType(CellType.D);
                             }
                             break;
@@ -205,7 +209,7 @@ public class MapLoader {
                             }
                             break;
                         case 'u':
-                            if(currentMap.equals("/welcome.txt")) {
+                            if(currentMap.equals("/welcome.txt") || currentMap.equals("/death.txt")) {
                                 cell.setType(CellType.U);
                             }
                             break;
@@ -226,7 +230,7 @@ public class MapLoader {
                             new Helm(cell);
                             break;
                         case 'o':
-                            if(currentMap.equals("/welcome.txt")) {
+                            if(currentMap.equals("/welcome.txt") || currentMap.equals("/death.txt")) {
                                 cell.setType(CellType.O);
                             } else {
                                 cell.setType(CellType.FLOOR);
@@ -252,6 +256,10 @@ public class MapLoader {
                             Gandalf mage = new Gandalf(cell);
                             cell.setActor(mage);
                             gandalf = mage;
+                            break;
+                        case 'ŧ':
+                            cell.setType(CellType.FLOOR);
+                            new Stealer(cell);
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

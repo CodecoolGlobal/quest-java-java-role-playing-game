@@ -13,12 +13,12 @@ public class brokenBridge extends Actor{
     }
 
     @Override
-    void die(Cell cell) {
+    protected void die(Cell cell) {
         cell.setActor(null);
     }
 
     @Override
-    void attack(Actor enemy) {
+    protected void attack(Actor enemy) {
 
     }
 }

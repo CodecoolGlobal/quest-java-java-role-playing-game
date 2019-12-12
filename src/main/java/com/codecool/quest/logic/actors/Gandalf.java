@@ -9,7 +9,7 @@ public class Gandalf extends Actor implements Aggro {
     }
 
     @Override
-    void die(Cell cell) {
+    protected void die(Cell cell) {
 
     }
 
@@ -19,7 +19,7 @@ public class Gandalf extends Actor implements Aggro {
     }
 
     @Override
-    void attack(Actor enemy) {
+    protected void attack(Actor enemy) {
 
     }
 

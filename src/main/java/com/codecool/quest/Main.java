@@ -65,8 +65,6 @@ public class Main extends Application {
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
-        CompletableFuture.runAsync(this::aiMovement);
-
         primaryStage.setTitle("Codecool Quest");
         primaryStage.show();
     }
@@ -94,7 +92,7 @@ public class Main extends Application {
                 labelRefresh();
                 break;
             case F:
-                if (MapLoader.currentMap.equals("/welcome.txt")){
+                if (MapLoader.currentMap.equals("/welcome.txt")) {
                     changeMap("/map.txt");
                 } else {
                     map.getPlayer().pickUp();
@@ -124,6 +122,10 @@ public class Main extends Application {
                 if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
                     changeMap("/map_2.txt");
                 }
+                if (!MapLoader.currentMap.equals("/welcome.txt") && map.getPlayer().isDead()) {
+                    System.out.println("death started");
+                    changeMap("/death.txt");
+                }
             }
         }
     }
@@ -140,10 +142,10 @@ public class Main extends Application {
     }
 
     private void aiMovement(){
-        while(MapLoader.currentMap.equals("/map.txt")) {
+        while(MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
             int playerX = map.getPlayer().getX();
             int playerY = map.getPlayer().getY();
-            for (Skeleton skeleton: MapLoader.skeletons) {
+            for (Skeleton skeleton : MapLoader.skeletons) {
                 if (!skeleton.isDead() && skeleton.isAggroStatus()) {
                     int monsterX = skeleton.getX();
                     int monsterY = skeleton.getY();
@@ -183,14 +185,15 @@ public class Main extends Application {
         }
         MapLoader.currentMap = newMap;
         map = MapLoader.loadMap();
-        if (MapLoader.currentMap.equals("/map.txt")) {
-            map.getPlayer().visionRadius();
-        }
         map.getPlayer().getInventory().addAll(savedInventory);
         map.getPlayer().setHealth(savedHealth);
         map.getPlayer().setDefense(savedDefense);
         refresh();
         labelRefresh();
+        if (MapLoader.currentMap.equals("/map.txt")) {
+            map.getPlayer().visionRadius();
+            CompletableFuture.runAsync(this::aiMovement);
+        }
     }
 
     private void gandalfMovement() {

@@ -1,6 +1,7 @@
 package com.codecool.quest;
 
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.MapLoader;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -73,6 +74,9 @@ public class Tiles {
         tileMap.put("key", new Tile(16,23));
         tileMap.put("apple", new Tile(15,29));
         tileMap.put("helm", new Tile(4, 22));
+        //Spells
+        tileMap.put("fireball", new Tile(15, 10));
+        tileMap.put("stealer", new Tile(26, 9));
         //Letters
         tileMap.put("w", new Tile(28, 31));
         tileMap.put("e", new Tile(23, 30));
@@ -90,6 +94,7 @@ public class Tiles {
         tileMap.put("a", new Tile(19, 30));
         tileMap.put("f", new Tile(24, 30));
         tileMap.put("y", new Tile(30, 31));
+        tileMap.put("i", new Tile(27, 30));
         tileMap.put("!", new Tile(19, 25));
     }
 

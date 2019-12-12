@@ -2,6 +2,7 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Tool;
@@ -9,8 +10,8 @@ import com.codecool.quest.logic.items.Tool;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 
 public class Player extends Actor implements Aggro {
     private List<Item> inventory = new ArrayList<>();
@@ -46,8 +47,7 @@ public class Player extends Actor implements Aggro {
 
     @Override
     public void die(Cell cell) {
-        MapLoader.currentMap = "/death.txt";
-        MapLoader.loadMap();
+        this.isDead = true;
     }
 
     @Override
@@ -63,6 +63,22 @@ public class Player extends Actor implements Aggro {
                 openDoor(nextCell);
             } else if (nextCell.getActor().getTileName().equals("brokenBridge")) {
                 fixBridge(nextCell);
+            } else if (nextCell.getActor().getTileName().equals(("stealer"))) {
+                if (nextCell.getActor().getStolenItem() != null) {
+                    attack(nextCell.getActor());
+                } else {
+                    Random rnd = new Random();
+                    Item stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
+                    inventory.remove(stolenItem);
+                    nextCell.getActor().setStolenItem(stolenItem);
+                    int i = rnd.nextInt(13) + 9;
+                    int j = rnd.nextInt((14))-4;
+                    Cell c = nextCell.getNeighbor(-i,j);
+                    nextCell.getActor().setCell(c);
+                    c.setActor(nextCell.getActor());
+                    nextCell.setActor(null);
+
+                }
             } else {
                 attack(nextCell.getActor());
             }
@@ -70,10 +86,13 @@ public class Player extends Actor implements Aggro {
     }
 
     @Override
-    void attack(Actor enemy) {
-        enemy.health -= this.attack - enemy.defense;
-        if (enemy.health <= 0) {
-            enemy.die(enemy.getCell());
+    protected void attack(Actor enemy) {
+        if (enemy.health > 0) {
+            if(this.attack - enemy.defense > 0) {
+                enemy.health -= this.attack - enemy.defense;
+            }
+        } else {
+            enemy.die(enemy.cell);
         }
     }
 
