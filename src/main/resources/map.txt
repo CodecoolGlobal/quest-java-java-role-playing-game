@@ -4,7 +4,7 @@ Ti.I.i.iIi..~..i.ii.iIiit
 Ti..s...s...B......iIiHit
 TtIii...II..~.IitI...iiI|
 tTiIi..iII..~.iITi...iIit
-TI.Ii.siII.v~.iiIit...iIt
+TI.Ii.siII.v~.iiIit.ŧ.iIt
 |ti.i...iI..~.iIiiT...iiT
 TTiii.iI..a.~.iIiit....it
 Tiiii..IiiT.~.iiIi.I..iTi
@@ -15,7 +15,7 @@ tiiIi..iIiI.~.iI.Ii....It
 T|iIi...S.t.~|tTTtTt|tT|t
 tIiiI...iiT.~.i..I.iiI.rT
 TiiiIi..IIi.~.i..Ii."MMMM
-T|....ŧ.iiI.~...I...l$$$$
+T|......iiI.~...I...l$$$$
 |I.*....iIn.~.iIiIii,WDWW
 tT@...iI....b...........t
 |ttTTh|t|tTt~TtttthTttTth

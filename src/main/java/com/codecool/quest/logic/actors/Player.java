@@ -1,6 +1,7 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.items.Item;
 import com.codecool.quest.logic.items.Key;
 import com.codecool.quest.logic.items.Tool;
@@ -67,10 +68,13 @@ public class Player extends Actor implements Aggro {
                     attack(nextCell.getActor());
                 } else {
                     Random rnd = new Random();
-                    Item stolenItem;
-                    stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
+                    Item stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
                     inventory.remove(stolenItem);
                     nextCell.getActor().setStolenItem(stolenItem);
+                    Cell c = nextCell.getNeighbor(-5,-5);
+                    c.setActor(nextCell.getActor());
+                    nextCell.setActor(null);
+
                 }
             } else {
                 attack(nextCell.getActor());

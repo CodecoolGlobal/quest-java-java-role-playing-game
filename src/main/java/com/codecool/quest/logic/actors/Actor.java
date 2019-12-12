@@ -2,10 +2,11 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.Drawable;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.items.Item;
 
 public abstract class Actor implements Drawable {
-    Cell cell;
+    public Cell cell;
     int health;
     final int originalHealth = 20;
     int attack;
