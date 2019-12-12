@@ -1,36 +1,52 @@
 package com.codecool.quest.logic.actors;
 
-import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.*;
+import com.codecool.quest.logic.environment.Fireball;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.environment.Fireball;
+
+import java.util.Objects;
 
 public class Gandalf extends Actor implements Aggro {
 
     public Gandalf(Cell cell) {
-        super(cell, 50, 10, 10);
+        super(cell, 1000, 10, 0);
     }
 
-    public void fireWall(GameMap map){
+    public void fireWall(GameMap map) {
 
-        for(int i=0; i<map.getWidth(); i++){
+        Fireball[] fireWall = new Fireball[map.getWidth()];
+        for (int i = 0; i < map.getWidth(); i++) {
             Cell cell = map.getCell(i, 0);
             Fireball ball = new Fireball(cell);
             cell.setActor(ball);
-            for(int j=0; j<map.getHeight();j++) {
-                ball.move(0, 1);
+            fireWall[i] = ball;
+        }
+        for (int j = 0; j < map.getHeight(); j++) {
+            for (Fireball f : fireWall) {
+                f.move(0, 1);
             }
         }
     }
 
     @Override
     protected void die(Cell cell) {
+        cell.setActor(null);
+        this.isDead = true;
+        cell.setType(CellType.REMAINS);
 
     }
 
     @Override
     public String getTileName() {
-        return "gandalf";
+        if (this.getHealth() > 10) {
+            return "gandalf";
+        } else {
+            this.setAttack(15);
+            return "dyingGandalf";
+        }
     }
+
 
     @Override
     protected void attack(Actor enemy) {
@@ -39,7 +55,7 @@ public class Gandalf extends Actor implements Aggro {
 
     @Override
     public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
-        return 0;
+        return Integer.compare(playerCoordinate, monsterCoordinate);
     }
 
     @Override

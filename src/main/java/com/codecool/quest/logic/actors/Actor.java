@@ -38,6 +38,10 @@ public abstract class Actor implements Drawable {
         return defense;
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public void setDefense(int defense) {
         this.defense = defense;
     }
@@ -66,5 +70,10 @@ public abstract class Actor implements Drawable {
 
     public void setStolenItem(Item stolenItem) {
         this.stolenItem = stolenItem;
+    }
+
+    public void setXY(int x, int y) {
+        cell.setX(x);
+        cell.setY(y);
     }
 }

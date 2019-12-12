@@ -65,7 +65,8 @@ public class Ogre extends Actor implements Aggro {
                 nextCell.getActor().getTileName().contains("player")) {
             attack(nextCell.getActor());
         } else if (aggroStatus &&
-                !isDead && nextCell.getType().isSteppable()) {
+                !isDead && nextCell.getType().isSteppable() &&
+                Objects.isNull(nextCell.getActor())) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;

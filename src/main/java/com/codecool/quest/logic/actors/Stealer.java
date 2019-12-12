@@ -48,7 +48,6 @@ public class Stealer extends Actor implements Aggro{
                 if (!Objects.isNull(neighbour.getActor()) &&
                         neighbour.getActor().getTileName().contains("player")) {
                     aggroStatus = true;
-                    System.out.println("AGGRO");
                 }
             }
         }
@@ -71,11 +70,7 @@ public class Stealer extends Actor implements Aggro{
         }
     }
 
-
     public boolean isAggroStatus() {
-        return false;
+        return aggroStatus;
     }
-
-
-
 }
