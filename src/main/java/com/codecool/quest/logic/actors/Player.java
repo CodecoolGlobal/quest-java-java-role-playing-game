@@ -49,6 +49,7 @@ public class Player extends Actor implements Aggro {
         System.out.println("Game over mf");
     }
 
+
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
@@ -70,7 +71,10 @@ public class Player extends Actor implements Aggro {
                     Item stolenItem = this.inventory.get(rnd.nextInt(inventory.size()));
                     inventory.remove(stolenItem);
                     nextCell.getActor().setStolenItem(stolenItem);
-                    Cell c = nextCell.getNeighbor(-5,-5);
+                    int i = rnd.nextInt(13) + 9;
+                    int j = rnd.nextInt((14))-4;
+                    Cell c = nextCell.getNeighbor(-i,j);
+                    nextCell.getActor().setCell(c);
                     c.setActor(nextCell.getActor());
                     nextCell.setActor(null);
 
