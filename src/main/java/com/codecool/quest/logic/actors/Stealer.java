@@ -70,8 +70,7 @@ public class Stealer extends Actor implements Aggro{
         }
     }
 
-
     public boolean isAggroStatus() {
-        return false;
+        return aggroStatus;
     }
 }

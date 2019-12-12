@@ -46,8 +46,11 @@ public class Fireball extends Actor implements Drawable, Aggro {
 
     @Override
     protected void attack(Actor enemy) {
-        enemy.setHealth(enemy.getHealth()-attack);
-        if (enemy.getHealth() < 0) {
+        if (enemy.getHealth() > 0) {
+            if(this.attack - enemy.getDefense() > 0) {
+                enemy.setHealth(enemy.getHealth()-this.attack - enemy.getDefense());
+            }
+        } else {
             Player player = (Player) enemy;
             player.die(enemy.getCell());
         }

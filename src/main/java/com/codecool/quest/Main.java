@@ -125,7 +125,7 @@ public class Main extends Application {
                 if (cell.getFog() != null) {
                     Tiles.drawTile(context, cell.getFog(), x, y);
                 }
-                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 5 && map.getPlayer().getY() == 17) { // x: 22, y: 16
+                if (MapLoader.currentMap.equals("/map.txt") && map.getPlayer().getX() == 22 && map.getPlayer().getY() == 16) { // x: 22, y: 16
                     changeMap("/map_2.txt");
                 }
                 if (!MapLoader.currentMap.equals("/welcome.txt") && map.getPlayer().isDead()) {
