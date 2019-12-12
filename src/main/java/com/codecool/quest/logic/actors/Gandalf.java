@@ -5,6 +5,8 @@ import com.codecool.quest.logic.environment.Fireball;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.environment.Fireball;
 
+import java.util.Objects;
+
 public class Gandalf extends Actor implements Aggro {
 
     public Gandalf(Cell cell) {
