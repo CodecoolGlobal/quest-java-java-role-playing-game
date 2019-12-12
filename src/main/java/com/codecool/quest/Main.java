@@ -214,10 +214,11 @@ public class Main extends Application {
     private void gandalfMovement() {
         int counter = 0;
         int dx = 1;
-        while (!MapLoader.gandalf.isDead()) {
+        while (MapLoader.currentMap.equals("/map_2.txt")) {
             if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
                 dx = -dx;
             }
+            //fireball
             if (counter == 5) {
                 Gandalf gandalf = MapLoader.gandalf;
                 Fireball ball = new Fireball(MapLoader.gandalf.getCell().getNeighbor(0, 1));
@@ -231,9 +232,9 @@ public class Main extends Application {
                     }
                 }
             }
+            //firewall
             if (counter == 10) {
-
-                ArrayList<Fireball> fireWall = new ArrayList<Fireball>();
+                ArrayList<Fireball> fireWall = new ArrayList<>();
 
                 for (int i = 0; i < map.getWidth(); i++) {
                     Cell cell = map.getCell(i, 0);
@@ -248,7 +249,7 @@ public class Main extends Application {
                     }
                     refresh();
                     try {
-                        Thread.sleep(300);
+                        Thread.sleep(200);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

@@ -71,4 +71,9 @@ public abstract class Actor implements Drawable {
     public void setStolenItem(Item stolenItem) {
         this.stolenItem = stolenItem;
     }
+
+    public void setXY(int x, int y) {
+        cell.setX(x);
+        cell.setY(y);
+    }
 }
