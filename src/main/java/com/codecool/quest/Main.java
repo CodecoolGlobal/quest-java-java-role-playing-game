@@ -34,6 +34,7 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label defenseLabel = new Label();
+    Label gandalfhealth = new Label();
     ListView inventory = new ListView();
     List<Item> savedInventory = new ArrayList<>();
     int savedHealth;
@@ -53,6 +54,8 @@ public class Main extends Application {
         ui.add(defenseLabel, 0,1);
         ui.add(new Label("Inventory"), 0, 2);
         ui.add(inventory, 0, 3);
+        ui.add(gandalfhealth,0,4);
+
 
         BorderPane borderPane = new BorderPane();
 
@@ -136,6 +139,9 @@ public class Main extends Application {
         healthLabel.setText("Health: " + map.getPlayer().getHealth());
         defenseLabel.setText("Defense: " + map.getPlayer().getDefense());
         inventory.getItems().clear();
+        if (MapLoader.currentMap.equals("/map_2.txt")) {
+            gandalfhealth.setText("Boss Health: "+ MapLoader.gandalf.getHealth());
+        }
         for (Item item : map.getPlayer().getInventory()) {
             if (!inventory.getItems().contains(item.getTileName())) {
                 inventory.getItems().add(item.getTileName());
@@ -210,7 +216,7 @@ public class Main extends Application {
             if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
                 dx = -dx;
             }
-            if (counter == 5) {
+            if (counter == 10) {
                 Gandalf gandalf = MapLoader.gandalf;
                 Fireball ball = new Fireball(MapLoader.gandalf.getCell().getNeighbor(0, 1));
                 while (!ball.isDead()) {
