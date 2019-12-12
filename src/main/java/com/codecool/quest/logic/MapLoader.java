@@ -31,7 +31,7 @@ public class MapLoader {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
                     if (currentMap.equals("/map.txt")) {
-                        cell.setFog(new Fog(cell));
+                        //cell.setFog(new Fog(cell));
                     }
                     switch (line.charAt(x)) {
                         case ' ':
