@@ -9,7 +9,7 @@ public class Stealer extends Actor implements Aggro{
     public Stealer(Cell cell){super(cell, 20, 2, 0); }
 
     @Override
-    void attack(Actor enemy) {
+    protected void attack(Actor enemy) {
         if (enemy.health > 0) {
             if(this.attack - enemy.defense > 0) {
                 enemy.health -= this.attack - enemy.defense;
@@ -20,7 +20,7 @@ public class Stealer extends Actor implements Aggro{
     }
 
     @Override
-    void die(Cell cell) {
+    protected void die(Cell cell) {
         cell.setActor(null);
         this.isDead = true;
         cell.setType(CellType.REMAINS);
