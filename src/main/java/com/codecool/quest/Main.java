@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 
@@ -145,6 +146,7 @@ public class Main extends Application {
 
     private void aiMovement(){
         while(MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
+            //skeleton movement
             int playerX = map.getPlayer().getX();
             int playerY = map.getPlayer().getY();
             for (Skeleton skeleton : MapLoader.skeletons) {
@@ -161,7 +163,7 @@ public class Main extends Application {
             int ogreX = MapLoader.ogre.getX();
             int ogreY = MapLoader.ogre.getY();
             MapLoader.ogre.move(MapLoader.ogre.calculateCoordinate(playerX, ogreX), MapLoader.ogre.calculateCoordinate(playerY, ogreY));
-
+            //stealer movement
             int stealerX = MapLoader.stealer.getX();
             int stealerY = MapLoader.stealer.getY();
             MapLoader.stealer.move(MapLoader.stealer.calculateCoordinate(playerX, stealerX), MapLoader.stealer.calculateCoordinate(playerY, stealerY));
@@ -224,7 +226,9 @@ public class Main extends Application {
                 }
                 counter = 0;
             }
-            MapLoader.gandalf.move(dx, 0);
+            if (Objects.isNull(MapLoader.gandalf.getCell().getNeighbor(dx, 0).getActor())) {
+                MapLoader.gandalf.move(dx, 0);
+            }
             refresh();
             try {
                 Thread.sleep(600);
