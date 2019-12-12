@@ -3,7 +3,9 @@ package com.codecool.quest;
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.actors.Gandalf;
 import com.codecool.quest.logic.actors.Skeleton;
+import com.codecool.quest.logic.environment.Fireball;
 import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -202,10 +204,25 @@ public class Main extends Application {
     }
 
     private void gandalfMovement() {
+        int counter = 0;
         int dx = 1;
         while (!MapLoader.gandalf.isDead()) {
             if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
                 dx = -dx;
+            }
+            if (counter == 5) {
+                Gandalf gandalf = MapLoader.gandalf;
+                Fireball ball = new Fireball(MapLoader.gandalf.getCell().getNeighbor(0, 1));
+                while (!ball.isDead()) {
+                    ball.move(ball.calculateCoordinate(map.getPlayer().getX(), ball.getX()), ball.calculateCoordinate(map.getPlayer().getY(), ball.getY()));
+                    refresh();
+                    try {
+                        Thread.sleep(300);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                counter = 0;
             }
             MapLoader.gandalf.move(dx, 0);
             refresh();
@@ -214,6 +231,7 @@ public class Main extends Application {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            ++counter;
         }
     }
 }

@@ -2,6 +2,9 @@ package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
 import com.codecool.quest.logic.GameMap;
+import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.environment.Fireball;
+import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.environment.Fireball;
 
 public class Gandalf extends Actor implements Aggro {
@@ -39,7 +42,7 @@ public class Gandalf extends Actor implements Aggro {
 
     @Override
     public int calculateCoordinate(int playerCoordinate, int monsterCoordinate) {
-        return 0;
+        return Integer.compare(playerCoordinate, monsterCoordinate);
     }
 
     @Override
