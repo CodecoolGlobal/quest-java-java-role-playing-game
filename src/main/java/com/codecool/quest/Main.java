@@ -6,6 +6,7 @@ import com.codecool.quest.logic.MapLoader;
 import com.codecool.quest.logic.actors.Gandalf;
 import com.codecool.quest.logic.actors.Skeleton;
 import com.codecool.quest.logic.environment.Fireball;
+import com.codecool.quest.logic.environment.Spider;
 import com.codecool.quest.logic.items.Item;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -221,7 +222,7 @@ public class Main extends Application {
             //fireball
             if (counter == 5) {
                 Gandalf gandalf = MapLoader.gandalf;
-                Fireball ball = new Fireball(MapLoader.gandalf.getCell().getNeighbor(0, 1));
+                Fireball ball = new Fireball(gandalf.getCell().getNeighbor(0, 1));
                 while (!ball.isDead()) {
                     ball.move(ball.calculateCoordinate(map.getPlayer().getX(), ball.getX()), ball.calculateCoordinate(map.getPlayer().getY(), ball.getY()));
                     refresh();
@@ -254,8 +255,23 @@ public class Main extends Application {
                         e.printStackTrace();
                     }
                 }
+            }
+            if (counter == 15) {
+                Gandalf gandalf = MapLoader.gandalf;
                 counter = 0;
-
+                Spider spider = new Spider(gandalf.getCell().getNeighbor(0, 1));
+                for (int i = 0; i < 8; i++) {
+                    if (!spider.isDead()) {
+                        spider.move(spider.calculateCoordinate(map.getPlayer().getX(), spider.getX()), spider.calculateCoordinate(map.getPlayer().getY(), spider.getY()));
+                        refresh();
+                        try {
+                            Thread.sleep(300);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                spider.getCell().setActor(null);
             }
             if (Objects.isNull(MapLoader.gandalf.getCell().getNeighbor(dx, 0).getActor())) {
                 MapLoader.gandalf.move(dx, 0);

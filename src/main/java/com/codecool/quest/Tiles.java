@@ -78,6 +78,7 @@ public class Tiles {
         //Spells
         tileMap.put("fireball", new Tile(15, 10));
         tileMap.put("stealer", new Tile(26, 9));
+        tileMap.put("spider", new Tile(30, 5));
         //Letters
         tileMap.put("w", new Tile(28, 31));
         tileMap.put("e", new Tile(23, 30));
