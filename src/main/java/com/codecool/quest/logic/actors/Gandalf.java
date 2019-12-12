@@ -1,16 +1,16 @@
 package com.codecool.quest.logic.actors;
 
-import com.codecool.quest.logic.Cell;
-import com.codecool.quest.logic.GameMap;
-import com.codecool.quest.logic.MapLoader;
+import com.codecool.quest.logic.*;
 import com.codecool.quest.logic.environment.Fireball;
 import com.codecool.quest.logic.GameMap;
 import com.codecool.quest.logic.environment.Fireball;
+
+import java.util.Objects;
 
 public class Gandalf extends Actor implements Aggro {
 
     public Gandalf(Cell cell) {
-        super(cell, 50, 10, 10);
+        super(cell, 1000, 10, 0);
     }
 
     public void fireWall(GameMap map) {
@@ -31,6 +31,9 @@ public class Gandalf extends Actor implements Aggro {
 
     @Override
     protected void die(Cell cell) {
+        cell.setActor(null);
+        this.isDead = true;
+        cell.setType(CellType.REMAINS);
 
     }
 
