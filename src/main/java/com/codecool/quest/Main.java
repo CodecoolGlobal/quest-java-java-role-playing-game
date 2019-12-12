@@ -18,9 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 
 
@@ -48,7 +46,7 @@ public class Main extends Application {
         ui.setPadding(new Insets(10));
 
         ui.add(healthLabel, 0, 0);
-        ui.add(defenseLabel, 0,1);
+        ui.add(defenseLabel, 0, 1);
         ui.add(new Label("Inventory"), 0, 2);
         ui.add(inventory, 0, 3);
 
@@ -72,22 +70,30 @@ public class Main extends Application {
     private void onKeyPressed(KeyEvent keyEvent) {
         switch (keyEvent.getCode()) {
             case W:
-                map.getPlayer().move(0, -1);
+                if(!MapLoader.currentMap.equals("/death.txt")){
+                    map.getPlayer().move(0, -1);
+                }
                 refresh();
                 labelRefresh();
                 break;
             case S:
-                map.getPlayer().move(0, 1);
+                if(!MapLoader.currentMap.equals("/death.txt")) {
+                    map.getPlayer().move(0, 1);
+                }
                 refresh();
                 labelRefresh();
                 break;
             case A:
-                map.getPlayer().move(-1, 0);
+                if(!MapLoader.currentMap.equals("/death.txt")) {
+                    map.getPlayer().move(-1, 0);
+                }
                 refresh();
                 labelRefresh();
                 break;
             case D:
-                map.getPlayer().move(1, 0);
+                if(!MapLoader.currentMap.equals("/death.txt")) {
+                    map.getPlayer().move(1, 0);
+                }
                 refresh();
                 labelRefresh();
                 break;
@@ -123,7 +129,6 @@ public class Main extends Application {
                     changeMap("/map_2.txt");
                 }
                 if (!MapLoader.currentMap.equals("/welcome.txt") && map.getPlayer().isDead()) {
-                    System.out.println("death started");
                     changeMap("/death.txt");
                 }
             }
@@ -141,8 +146,8 @@ public class Main extends Application {
         }
     }
 
-    private void aiMovement(){
-        while(MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
+    private void aiMovement() {
+        while (MapLoader.currentMap.equals("/map.txt") && !map.getPlayer().isDead()) {
             int playerX = map.getPlayer().getX();
             int playerY = map.getPlayer().getY();
             for (Skeleton skeleton : MapLoader.skeletons) {

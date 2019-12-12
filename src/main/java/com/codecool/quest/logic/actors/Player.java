@@ -23,6 +23,10 @@ public class Player extends Actor implements Aggro {
     public String getTileName() {
         List<String> strInventory = new ArrayList<>();
 
+        if(MapLoader.currentMap.equals("/death.txt")) {
+            return "playerDead";
+        }
+
         for (Item item : getInventory()) {
             strInventory.add(item.getTileName());
         }

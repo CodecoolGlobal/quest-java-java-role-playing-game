@@ -63,6 +63,7 @@ public class Tiles {
         tileMap.put("columnBottomRight", new Tile(21,4));
         //Actors
         tileMap.put("player", new Tile(25, 0));
+        tileMap.put("playerDead", new Tile(22, 26));
         tileMap.put("playerWithShield", new Tile(27, 0));
         tileMap.put("playerWithHelm", new Tile(30,0));
         tileMap.put("playerWithShieldAndHelm", new Tile(28,0));

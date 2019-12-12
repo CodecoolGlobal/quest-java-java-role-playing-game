@@ -185,6 +185,9 @@ public class MapLoader {
                                 cell.setType(CellType.STONEFLOOR);
                             }
                             map.setPlayer(new Player(cell));
+                            if (currentMap.equals("/death.txt")) {
+                                cell.setType(CellType.EMPTY);
+                            }
                             break;
                         case 'S':
                             cell.setType(CellType.FLOOR);
