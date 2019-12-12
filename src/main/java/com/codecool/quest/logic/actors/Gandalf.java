@@ -1,11 +1,25 @@
 package com.codecool.quest.logic.actors;
 
 import com.codecool.quest.logic.Cell;
+import com.codecool.quest.logic.GameMap;
+import com.codecool.quest.logic.environment.Fireball;
 
 public class Gandalf extends Actor implements Aggro {
 
     public Gandalf(Cell cell) {
         super(cell, 50, 10, 10);
+    }
+
+    public void fireWall(GameMap map){
+
+        for(int i=0; i<map.getWidth(); i++){
+            Cell cell = map.getCell(i, 0);
+            Fireball ball = new Fireball(cell);
+            cell.setActor(ball);
+            for(int j=0; j<map.getHeight();j++) {
+                ball.move(0, 1);
+            }
+        }
     }
 
     @Override

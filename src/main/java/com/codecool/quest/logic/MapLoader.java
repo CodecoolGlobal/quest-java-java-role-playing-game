@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class MapLoader {
     public static LinkedList<Skeleton> skeletons = new LinkedList<>();
     public static Ogre ogre;
+    public static Stealer stealer;
     public static Gandalf gandalf;
     public static String currentMap = "/welcome.txt";
 
@@ -259,7 +260,9 @@ public class MapLoader {
                             break;
                         case 'ŧ':
                             cell.setType(CellType.FLOOR);
-                            new Stealer(cell);
+                            Stealer thief = new Stealer(cell);
+                            cell.setActor(thief);
+                            stealer = thief;
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
