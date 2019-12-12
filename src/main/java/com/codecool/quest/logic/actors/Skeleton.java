@@ -22,7 +22,7 @@ public class Skeleton extends Actor implements Aggro {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (nextCell.getActor() != null && nextCell.getActor().getTileName().contains("player")){
             attack(nextCell.getActor());
-        } else if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isStepable()) {
+        } else if (Objects.isNull(nextCell.getActor()) && nextCell.getType().isSteppable()) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;

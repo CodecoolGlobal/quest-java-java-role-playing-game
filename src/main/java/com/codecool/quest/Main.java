@@ -59,7 +59,9 @@ public class Main extends Application {
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        map.getPlayer().visionRadius();
+        if (!MapLoader.currentMap.equals("/welcome.txt")) {
+            map.getPlayer().visionRadius();
+        }
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
@@ -92,9 +94,13 @@ public class Main extends Application {
                 labelRefresh();
                 break;
             case F:
-                map.getPlayer().pickUp();
-                refresh();
-                labelRefresh();
+                if (MapLoader.currentMap.equals("/welcome.txt")){
+                    changeMap("/map.txt");
+                } else {
+                    map.getPlayer().pickUp();
+                    refresh();
+                    labelRefresh();
+                }
                 break;
         }
     }
@@ -134,11 +140,11 @@ public class Main extends Application {
     }
 
     private void aiMovement(){
-        while(true) {
+        while(MapLoader.currentMap.equals("/map.txt")) {
+            int playerX = map.getPlayer().getX();
+            int playerY = map.getPlayer().getY();
             for (Skeleton skeleton: MapLoader.skeletons) {
                 if (!skeleton.isDead() && skeleton.isAggroStatus()) {
-                    int playerX = map.getPlayer().getX();
-                    int playerY = map.getPlayer().getY();
                     int monsterX = skeleton.getX();
                     int monsterY = skeleton.getY();
                     skeleton.move(skeleton.calculateCoordinate(playerX, monsterX), skeleton.calculateCoordinate(playerY, monsterY));
@@ -147,6 +153,10 @@ public class Main extends Application {
                     skeleton.move(getRandomNumber(), getRandomNumber());
                 }
             }
+            int ogreX = MapLoader.ogre.getX();
+            int ogreY = MapLoader.ogre.getY();
+            MapLoader.ogre.move(MapLoader.ogre.calculateCoordinate(playerX, ogreX), MapLoader.ogre.calculateCoordinate(playerY, ogreY));
+
             refresh();
             try {
                 Thread.sleep(600);
@@ -154,6 +164,7 @@ public class Main extends Application {
                 e.printStackTrace();
             }
         }
+        gandalfMovement();
     }
 
     private int getRandomNumber() {
@@ -162,15 +173,36 @@ public class Main extends Application {
     }
 
     private void changeMap(String newMap) {
+        if (!MapLoader.currentMap.equals("/welcome.txt")) {
+            savedInventory.addAll(map.getPlayer().getInventory());
+            savedHealth = map.getPlayer().getHealth();
+            savedDefense = map.getPlayer().getDefense();
+        }
         MapLoader.currentMap = newMap;
-        savedInventory.addAll(map.getPlayer().getInventory());
-        savedHealth = map.getPlayer().getHealth();
-        savedDefense = map.getPlayer().getDefense();
         map = MapLoader.loadMap();
+        if (MapLoader.currentMap.equals("/map.txt")) {
+            map.getPlayer().visionRadius();
+        }
         map.getPlayer().getInventory().addAll(savedInventory);
         map.getPlayer().setHealth(savedHealth);
         map.getPlayer().setDefense(savedDefense);
         refresh();
         labelRefresh();
+    }
+
+    private void gandalfMovement() {
+        int dx = 1;
+        while (!MapLoader.gandalf.isDead()) {
+            if (!MapLoader.gandalf.getCell().getNeighbor(dx, 0).getType().isSteppable()) {
+                dx = -dx;
+            }
+            MapLoader.gandalf.move(dx, 0);
+            refresh();
+            try {
+                Thread.sleep(600);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

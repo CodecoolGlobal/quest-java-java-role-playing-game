@@ -49,7 +49,6 @@ public class Player extends Actor implements Aggro {
         System.out.println("Game over mf");
     }
 
-
     @Override
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
