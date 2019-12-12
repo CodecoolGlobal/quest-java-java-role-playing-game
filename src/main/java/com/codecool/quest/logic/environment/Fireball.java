@@ -14,7 +14,6 @@ public class Fireball extends Actor implements Drawable, Aggro {
     public Fireball(Cell cell) {
         super(cell, 50, 10, 10);
     }
-
     @Override
     public String getTileName() {
         return "fireball";
