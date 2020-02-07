@@ -3,9 +3,7 @@ package com.codecool.quest.logic.actors;
 import com.codecool.quest.logic.*;
 import com.codecool.quest.logic.environment.Fireball;
 import com.codecool.quest.logic.GameMap;
-import com.codecool.quest.logic.environment.Fireball;
 
-import java.util.Objects;
 
 public class Gandalf extends Actor implements Aggro {
 
