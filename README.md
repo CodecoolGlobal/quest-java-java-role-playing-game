@@ -13,6 +13,9 @@ You are a warrior who must defeat the evil mage!
 ## Game tutorial
 Game is played using the W, A, S, D keys on the keyboard and F key to pick-up items.
 
+## Technologies used
+- JavaFX
+
 ## Game demo
 ![Game Demo](demo/demo1.gif)
 
