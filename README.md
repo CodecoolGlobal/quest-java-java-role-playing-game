@@ -1,35 +1,20 @@
-# Codecool Quest
+# JavaFX Role-playing Game
+You are a warrior who must defeat the evil mage!
 
-This is a simple tile-based RPG game.
+# Game features
+- Item looting system 
+- Enemy agro and follow when getting close
+- Multiple maps
+- RPG elements
+- Character changes on item pickup
+- Boss battle
+- Game puzzles
 
-## Opening the project
+# Game tutorial
+Game is played using the W, A, S, D keys on the keyboard and F key to pick-up items.
 
-Open the project in IntelliJ IDEA. This is a Maven project, so you will need to open `pom.xml`.
+# Game demo
+![Game Demo](demo/demo1.gif)
 
-The project is using JavaFX.  Use the `javafx` maven plugin to build and run the program.
-
-Build:
-
-```bash
-mvn javafx:compile
-```
-
-Run:
-
-```bash
-mvn javafx:run
-```
-
-## Architecture
-
-The project is meant to teach the concept of **layer separation**. All of the game logic (that is, player movement, game rules, and so on), is in the `logic` package, completely independent of user interface code. In principle, you could implement a completely different interface (terminal, web, Virtual Reality...) for the same logic code.
-
-## Product Backlog
-
-[Codecool Quest Product Backlog](https://docs.google.com/spreadsheets/d/1CvVh2s6obWEh4eQxu8w4f3jBLhz208bG-1FybWGc1sA/edit#gid=0)
-
-## Graphics
-
-The tiles used in the game are from [1-Bit Pack by Kenney](https://kenney.nl/assets/bit-pack), shared on [CC0 1.0 Universal license](https://creativecommons.org/publicdomain/zero/1.0/).
-
-![tiles](src/main/resources/tiles.png)
+# Boss battle demo
+![Game Demo](demo/demo3.gif)
